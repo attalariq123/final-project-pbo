@@ -6,7 +6,6 @@ import VIEW.AdminHome;
 import VIEW.CashierHome;
 import VIEW.LoginForm;
 import java.sql.*;
-import javax.swing.JOptionPane;
 
 public final class LoginControl {
     private final UserModel model;
