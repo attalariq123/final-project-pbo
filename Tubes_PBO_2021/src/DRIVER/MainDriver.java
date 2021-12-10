@@ -10,6 +10,5 @@ public class MainDriver {
         LoginForm v = new LoginForm();
         LoginControl c = new LoginControl(m, v);
         c.initController();
-        // Ini tambahan line
     }
 }
