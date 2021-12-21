@@ -7,6 +7,8 @@ import VIEW.CashierHome;
 import VIEW.LoginForm;
 import java.sql.*;
 
+// Test Test
+
 public final class LoginControl {
     private final UserModel model;
     private final LoginForm view;
