@@ -6,6 +6,7 @@ import VIEW.AdminHome;
 import VIEW.CashierHome;
 import VIEW.LoginForm;
 import java.sql.*;
+import java.sql.BatchUpdateException;
 
 public final class LoginControl {
     private final UserModel model;
