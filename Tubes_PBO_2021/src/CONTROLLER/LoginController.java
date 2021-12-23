@@ -5,15 +5,19 @@ import MODEL.UserModel;
 import VIEW.AdminHome;
 import VIEW.CashierHome;
 import VIEW.LoginForm;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // Test Test
 
-public final class LoginControl {
+public final class LoginController {
     private final UserModel model;
     private final LoginForm view;
     
-    public LoginControl(UserModel m, LoginForm v) {
+    public LoginController(UserModel m, LoginForm v) {
         model = m;
         view = v;
         initView();
@@ -26,16 +30,28 @@ public final class LoginControl {
     }
     
     public void initController() {
-        view.getClearButton().addActionListener(e -> clearButtonAction());
-        view.getLoginButton().addActionListener(e -> loginButtonAction());
+        view.addButtonListener(new ButtonListener());
     }
     
-   public void clearButtonAction() {
-       view.getUsernameText().setText("");
-       view.getPasswordText().setText("");
-   }
+    public class ButtonListener implements ActionListener {
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println(e.getActionCommand());
+            switch (e.getActionCommand()) {
+                case "Login":
+                    login();
+                    break;
+                case "Clear":
+                    view.clearFields();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
    
-   public void loginButtonAction() {
+    public void login() {
        model.setUsername(view.getUsernameText().getText());
        model.setPassword(view.getPasswordText().getText());
        
@@ -55,11 +71,12 @@ public final class LoginControl {
                ResultSet rs = st.executeQuery();
                
                if (rs.next()) {
-                    AdminHome home = new AdminHome(model);
-                    home.setVisible(true);
+                    AdminHome v = new AdminHome();
+                    AdminController c = new AdminController(v);
+                    c.initController();
                     view.dispose();
                 } else {
-                   view.loginError(username, password);
+                    view.loginError(username, password);
                }
            } else {
                PreparedStatement st;
@@ -78,12 +95,7 @@ public final class LoginControl {
                }
            }
        }catch(SQLException e){
-           e.printStackTrace();
+           Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
        }
-       
-       
-   }
-   
-   
-   
+    }
 }

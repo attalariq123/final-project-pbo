@@ -1,5 +1,6 @@
 package VIEW;
 
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class LoginForm extends JFrame {
@@ -156,7 +157,11 @@ public class LoginForm extends JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-
+    public void addButtonListener (ActionListener buttonlistener) {
+        loginButton.addActionListener(buttonlistener);
+        clearButton.addActionListener(buttonlistener);
+    }
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel appsLabel;
     private javax.swing.JButton clearButton;
@@ -170,6 +175,11 @@ public class LoginForm extends JFrame {
     private javax.swing.JPanel welcomePanel;
     // End of variables declaration//GEN-END:variables
 
+    public void clearFields() {
+       getUsernameText().setText("");
+       getPasswordText().setText("");
+    }
+    
     public JLabel getAppsLabel() {
         return appsLabel;
     }
