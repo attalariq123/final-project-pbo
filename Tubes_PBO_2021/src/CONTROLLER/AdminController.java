@@ -40,9 +40,6 @@ public class AdminController {
                 case "CATEGORY":
                     productMenu();
                     break;
-                case "ORDER":
-                    productMenu();
-                    break;
                 case "CUSTOMER":
                     productMenu();
                     break;
