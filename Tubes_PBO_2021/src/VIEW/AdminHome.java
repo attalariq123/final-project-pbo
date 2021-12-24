@@ -19,7 +19,6 @@ public class AdminHome extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         productButton = new javax.swing.JButton();
         categoryButton = new javax.swing.JButton();
-        orderButton = new javax.swing.JButton();
         customerButton = new javax.swing.JButton();
         cashierButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
@@ -52,7 +51,7 @@ public class AdminHome extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(appLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -62,9 +61,9 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(appLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(welcomeLabel1)
-                .addGap(8, 8, 8))
+                .addGap(4, 4, 4))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -84,14 +83,6 @@ public class AdminHome extends javax.swing.JFrame {
         categoryButton.setBorder(null);
         categoryButton.setBorderPainted(false);
         categoryButton.setContentAreaFilled(false);
-
-        orderButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        orderButton.setForeground(new java.awt.Color(0, 204, 102));
-        orderButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/order-icon.png"))); // NOI18N
-        orderButton.setText("ORDER");
-        orderButton.setBorder(null);
-        orderButton.setBorderPainted(false);
-        orderButton.setContentAreaFilled(false);
 
         customerButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
         customerButton.setForeground(new java.awt.Color(0, 204, 102));
@@ -119,19 +110,15 @@ public class AdminHome extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(customerButton)
-                .addGap(50, 50, 50)
-                .addComponent(cashierButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(productButton)
-                .addGap(50, 50, 50)
-                .addComponent(categoryButton)
-                .addGap(50, 50, 50)
-                .addComponent(orderButton)
-                .addGap(50, 50, 50))
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(productButton)
+                    .addComponent(customerButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(categoryButton)
+                    .addComponent(cashierButton))
+                .addContainerGap(88, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutButton)
@@ -140,18 +127,17 @@ public class AdminHome extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(productButton)
-                    .addComponent(categoryButton)
-                    .addComponent(orderButton))
-                .addGap(20, 20, 20)
+                    .addComponent(categoryButton))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customerButton)
                     .addComponent(cashierButton))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addComponent(logoutButton)
-                .addGap(10, 10, 10))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -177,7 +163,6 @@ public class AdminHome extends javax.swing.JFrame {
         logoutButton.addActionListener(buttonListener);
         productButton.addActionListener(buttonListener);
         categoryButton.addActionListener(buttonListener);
-        orderButton.addActionListener(buttonListener);
         customerButton.addActionListener(buttonListener);
         cashierButton.addActionListener(buttonListener);
     }
@@ -190,7 +175,6 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton logoutButton;
-    private javax.swing.JButton orderButton;
     private javax.swing.JButton productButton;
     private javax.swing.JLabel welcomeLabel1;
     // End of variables declaration//GEN-END:variables
@@ -225,14 +209,6 @@ public class AdminHome extends javax.swing.JFrame {
 
     public void setLogoutButton(JButton logoutButton) {
         this.logoutButton = logoutButton;
-    }
-
-    public JButton getOrderButton() {
-        return orderButton;
-    }
-
-    public void setOrderButton(JButton orderButton) {
-        this.orderButton = orderButton;
     }
 
     public JButton getProductButton() {
