@@ -1,6 +1,6 @@
 package CONTROLLER;
 
-import DRIVER.KoneksiDB;
+import DBHelper.KoneksiDB;
 import MODEL.UserModel;
 import VIEW.AdminHome;
 import VIEW.CashierHome;
@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 // Test Test
 
-public final class LoginController {
+public class LoginController {
     private final UserModel model;
     private final LoginForm view;
     

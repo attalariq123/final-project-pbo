@@ -1,5 +1,6 @@
 package CONTROLLER;
 
+import MODEL.ProductModel;
 import MODEL.UserModel;
 import VIEW.AdminHome;
 import VIEW.LoginForm;
@@ -56,7 +57,9 @@ public class AdminController {
     public void productMenu() {
         view.dispose();
         ProductMenu v = new ProductMenu();
-        v.setVisible(true);
+        ProductModel m = new ProductModel();
+        ProductController c = new ProductController(m, v);
+        c.initController();
     }
     
     public void logout() {
