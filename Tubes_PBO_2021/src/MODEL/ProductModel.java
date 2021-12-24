@@ -3,13 +3,15 @@ package MODEL;
 public class ProductModel {
     private int id;
     private String nama;
+    private String harga;
     private int kuantitas;
     private String deskripsi;
     private String kategori;
 
-    public ProductModel(int id, String nama, int kuantitas, String deskripsi, String kategori) {
+    public ProductModel(int id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
         this.id = id;
         this.nama = nama;
+        this.harga = harga;
         this.kuantitas = kuantitas;
         this.deskripsi = deskripsi;
         this.kategori = kategori;
@@ -31,6 +33,14 @@ public class ProductModel {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    public String getHarga() {
+        return harga;
+    }
+
+    public void setHarga(String harga) {
+        this.harga = harga;
     }
 
     public int getKuantitas() {
