@@ -1,6 +1,9 @@
 package CONTROLLER;
 
+<<<<<<< HEAD
 import MODEL.ProductModel;
+=======
+>>>>>>> b9b5201cfdd8dcd798655355baf197377bc31885
 import MODEL.UserModel;
 import VIEW.AdminHome;
 import VIEW.LoginForm;
@@ -36,6 +39,7 @@ public class AdminController {
                 case "PRODUCT":
                     productMenu();
                     break;
+<<<<<<< HEAD
                 case "CATEGORY":
                     productMenu();
                     break;
@@ -48,6 +52,8 @@ public class AdminController {
                 case "CASHIER":
                     productMenu();
                     break;
+=======
+>>>>>>> b9b5201cfdd8dcd798655355baf197377bc31885
                 default:
                     break;
             }
@@ -57,9 +63,13 @@ public class AdminController {
     public void productMenu() {
         view.dispose();
         ProductMenu v = new ProductMenu();
+<<<<<<< HEAD
         ProductModel m = new ProductModel();
         ProductController c = new ProductController(m, v);
         c.initController();
+=======
+        v.setVisible(true);
+>>>>>>> b9b5201cfdd8dcd798655355baf197377bc31885
     }
     
     public void logout() {

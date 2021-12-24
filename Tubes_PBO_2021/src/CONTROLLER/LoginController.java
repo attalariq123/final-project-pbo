@@ -13,7 +13,11 @@ import java.util.logging.Logger;
 
 // Test Test
 
+<<<<<<< HEAD:Tubes_PBO_2021/src/CONTROLLER/LoginController.java
 public class LoginController {
+=======
+public final class LoginController {
+>>>>>>> b9b5201cfdd8dcd798655355baf197377bc31885:Tubes_PBO_2021/src/CONTROLLER/LoginControl.java
     private final UserModel model;
     private final LoginForm view;
     

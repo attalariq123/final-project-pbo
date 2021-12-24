@@ -1,6 +1,7 @@
 package VIEW;
 
 import CONTROLLER.AdminController;
+<<<<<<< HEAD
 import DBHelper.productDB;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -8,6 +9,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+=======
+>>>>>>> b9b5201cfdd8dcd798655355baf197377bc31885
 
 public class ProductMenu extends javax.swing.JFrame {
 
@@ -116,8 +119,11 @@ public class ProductMenu extends javax.swing.JFrame {
         KategoriLabel.setForeground(new java.awt.Color(0, 204, 102));
         KategoriLabel.setText("Kategori");
 
+<<<<<<< HEAD
         kategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Makanan", "Elektronik" }));
 
+=======
+>>>>>>> b9b5201cfdd8dcd798655355baf197377bc31885
         addButton.setBackground(new java.awt.Color(0, 204, 102));
         addButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -254,6 +260,7 @@ public class ProductMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
+<<<<<<< HEAD
     private void productTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTableMouseClicked
         // TODO add your handling code here:
         String id = getProductTable().getValueAt(getProductTable().getSelectedRow(), 0).toString();
@@ -275,6 +282,37 @@ public class ProductMenu extends javax.swing.JFrame {
         editButton.addActionListener(buttonListener);
         deleteButton.addActionListener(buttonListener);
         refreshButton.addActionListener(buttonListener);
+=======
+   
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ProductMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ProductMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ProductMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ProductMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            new ProductMenu().setVisible(true);
+        });
+>>>>>>> b9b5201cfdd8dcd798655355baf197377bc31885
     }
     
     public void fetchDataProduct() {
