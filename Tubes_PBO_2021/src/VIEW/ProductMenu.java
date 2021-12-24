@@ -1,11 +1,19 @@
 package VIEW;
 
 import CONTROLLER.AdminController;
+import DBHelper.productDB;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class ProductMenu extends javax.swing.JFrame {
 
     public ProductMenu() {
         initComponents();
+        fetchDataProduct();
     }
 
     @SuppressWarnings("unchecked")
@@ -15,6 +23,7 @@ public class ProductMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         welcomeLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         IdLabel = new javax.swing.JLabel();
         NamaLabel = new javax.swing.JLabel();
@@ -24,15 +33,19 @@ public class ProductMenu extends javax.swing.JFrame {
         idText = new javax.swing.JTextField();
         namaText = new javax.swing.JTextField();
         kuantitasText = new javax.swing.JTextField();
-        deskripsiiText = new javax.swing.JTextField();
+        deskripsiText = new javax.swing.JTextField();
         kategoriCB = new javax.swing.JComboBox<>();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        productTable = new javax.swing.JTable();
+        clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manage Product");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 102));
 
@@ -42,15 +55,20 @@ public class ProductMenu extends javax.swing.JFrame {
         welcomeLabel.setText("Manajemen Produk");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        backButton.setBackground(new java.awt.Color(0, 204, 102));
+        backButton.setBackground(new java.awt.Color(255, 255, 255));
         backButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
-        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setForeground(new java.awt.Color(0, 204, 102));
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
+
+        refreshButton.setBackground(new java.awt.Color(255, 255, 255));
+        refreshButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        refreshButton.setForeground(new java.awt.Color(0, 204, 102));
+        refreshButton.setText("Refresh Data");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -59,9 +77,11 @@ public class ProductMenu extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backButton)
-                .addGap(253, 253, 253)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(welcomeLabel)
-                .addGap(322, 322, 322))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(refreshButton)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +89,8 @@ public class ProductMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(welcomeLabel)
-                    .addComponent(backButton))
+                    .addComponent(backButton)
+                    .addComponent(refreshButton))
                 .addGap(9, 9, 9))
         );
 
@@ -95,6 +116,8 @@ public class ProductMenu extends javax.swing.JFrame {
         KategoriLabel.setForeground(new java.awt.Color(0, 204, 102));
         KategoriLabel.setText("Kategori");
 
+        kategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Makanan", "Elektronik" }));
+
         addButton.setBackground(new java.awt.Color(0, 204, 102));
         addButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,7 +133,9 @@ public class ProductMenu extends javax.swing.JFrame {
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Delete");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        productTable.setAutoCreateRowSorter(true);
+        productTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        productTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -118,45 +143,53 @@ public class ProductMenu extends javax.swing.JFrame {
                 "ID", "Nama", "Kuantitas", "Deskripsi", "Kategori"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(0, 204, 102));
-        jScrollPane1.setViewportView(jTable1);
+        productTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        productTable.setSelectionBackground(new java.awt.Color(0, 204, 102));
+        productTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(productTable);
+
+        clearButton.setBackground(new java.awt.Color(0, 204, 102));
+        clearButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        clearButton.setForeground(new java.awt.Color(255, 255, 255));
+        clearButton.setText("Clear");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 3, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(NamaLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(IdLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(215, 215, 215))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(addButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(editButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(deleteButton))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(clearButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(KuantitasLabel)
                             .addComponent(DeskripsiLabel)
-                            .addComponent(KategoriLabel))
+                            .addComponent(KategoriLabel)
+                            .addComponent(NamaLabel)
+                            .addComponent(IdLabel))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deskripsiiText)
-                            .addComponent(kategoriCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deskripsiText)
                             .addComponent(kuantitasText)
                             .addComponent(namaText)
+                            .addComponent(kategoriCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(idText))))
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +212,7 @@ public class ProductMenu extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(DeskripsiLabel)
-                            .addComponent(deskripsiiText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(deskripsiText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(KategoriLabel)
@@ -188,7 +221,8 @@ public class ProductMenu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addButton)
                             .addComponent(editButton)
-                            .addComponent(deleteButton))))
+                            .addComponent(deleteButton)
+                            .addComponent(clearButton))))
                 .addGap(20, 20, 20))
         );
 
@@ -220,37 +254,35 @@ public class ProductMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
-   
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void productTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTableMouseClicked
+        // TODO add your handling code here:
+        String id = getProductTable().getValueAt(getProductTable().getSelectedRow(), 0).toString();
+        String nama = getProductTable().getValueAt(getProductTable().getSelectedRow(), 1).toString();
+        String kuantitas = getProductTable().getValueAt(getProductTable().getSelectedRow(), 2).toString();
+        String deskripsi = getProductTable().getValueAt(getProductTable().getSelectedRow(), 3).toString();
+        String kategori = getProductTable().getValueAt(getProductTable().getSelectedRow(), 4).toString();
+        
+        getIdText().setText(id);
+        getNamaText().setText(nama);
+        getKuantitasText().setText(kuantitas);
+        getDeskripsiText().setText(deskripsi);
+        getKategoriCB().setSelectedItem(kategori);        
+    }//GEN-LAST:event_productTableMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new ProductMenu().setVisible(true);
-        });
+    public void ProductButtonListener(ActionListener buttonListener) {
+        clearButton.addActionListener(buttonListener);
+        addButton.addActionListener(buttonListener);
+        editButton.addActionListener(buttonListener);
+        deleteButton.addActionListener(buttonListener);
+        refreshButton.addActionListener(buttonListener);
     }
-
+    
+    public void fetchDataProduct() {
+        DefaultTableModel dm = new productDB().getData();
+        productTable.setModel(dm);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DeskripsiLabel;
     private javax.swing.JLabel IdLabel;
@@ -259,17 +291,115 @@ public class ProductMenu extends javax.swing.JFrame {
     private javax.swing.JLabel NamaLabel;
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton clearButton;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JTextField deskripsiiText;
+    private javax.swing.JTextField deskripsiText;
     private javax.swing.JButton editButton;
     private javax.swing.JTextField idText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> kategoriCB;
     private javax.swing.JTextField kuantitasText;
     private javax.swing.JTextField namaText;
+    private javax.swing.JTable productTable;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    public void setAddButton(JButton addButton) {
+        this.addButton = addButton;
+    }
+
+    public JButton getRefreshButton() {
+        return refreshButton;
+    }
+
+    public void setRefreshButton(JButton refreshButton) {
+        this.refreshButton = refreshButton;
+    }
+    
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public void setBackButton(JButton backButton) {
+        this.backButton = backButton;
+    }
+
+    public JButton getDeleteButton() {
+        return deleteButton;
+    }
+
+    public void setDeleteButton(JButton deleteButton) {
+        this.deleteButton = deleteButton;
+    }
+
+    public JTextField getDeskripsiText() {
+        return deskripsiText;
+    }
+
+    public void setDeskripsiText(JTextField deskripsiText) {
+        this.deskripsiText = deskripsiText;
+    }
+
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    public void setEditButton(JButton editButton) {
+        this.editButton = editButton;
+    }
+    
+    public JButton getClearButton() {
+        return clearButton;
+    }
+
+    public void setClearButton(JButton clearButton) {
+        this.clearButton = clearButton;
+    }
+
+    public JTextField getIdText() {
+        return idText;
+    }
+
+    public void setIdText(JTextField idText) {
+        this.idText = idText;
+    }
+
+    public JComboBox<String> getKategoriCB() {
+        return kategoriCB;
+    }
+
+    public void setKategoriCB(JComboBox<String> kategoriCB) {
+        this.kategoriCB = kategoriCB;
+    }
+
+    public JTextField getKuantitasText() {
+        return kuantitasText;
+    }
+
+    public void setKuantitasText(JTextField kuantitasText) {
+        this.kuantitasText = kuantitasText;
+    }
+
+    public JTextField getNamaText() {
+        return namaText;
+    }
+
+    public void setNamaText(JTextField namaText) {
+        this.namaText = namaText;
+    }
+
+    public JTable getProductTable() {
+        return productTable;
+    }
+
+    public void setProductTable(JTable productTable) {
+        this.productTable = productTable;
+    }
 }
