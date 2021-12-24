@@ -56,6 +56,7 @@ public class ProductController {
     public void clearFields() {
         view.getIdText().setText("");
         view.getNamaText().setText("");
+        view.getHargaText().setText("");
         view.getKuantitasText().setText("");
         view.getDeskripsiText().setText("");
         view.getKategoriCB().setSelectedIndex(0);
@@ -64,17 +65,19 @@ public class ProductController {
     public void addData() {
         model.setId(Integer.parseInt(view.getIdText().getText()));
         model.setNama(view.getNamaText().getText());
+        model.setHarga(view.getHargaText().getText());
         model.setKuantitas(Integer.parseInt(view.getKuantitasText().getText()));
         model.setDeskripsi(view.getDeskripsiText().getText());
         model.setKategori(view.getKategoriCB().getSelectedItem().toString());
         
         int id = model.getId();
         String nama = model.getNama();
+        String harga = model.getHarga();
         int kuantitas = model.getKuantitas();
         String deskripsi = model.getDeskripsi();
         String kategori = model.getKategori();
         
-        if (new productDB().add(id, nama, kuantitas, deskripsi, kategori)) {
+        if (new productDB().add(id, nama, harga, kuantitas, deskripsi, kategori)) {
             JOptionPane.showMessageDialog(null, "Insert Produk Berhasil");
 
             //CLEAR TEXTFIELD
@@ -115,16 +118,18 @@ public class ProductController {
         
         model.setId(Integer.parseInt(id));
         model.setNama(view.getNamaText().getText());
+        model.setHarga(view.getHargaText().getText());
         model.setKuantitas(Integer.parseInt(view.getKuantitasText().getText()));
         model.setDeskripsi(view.getDeskripsiText().getText());
         model.setKategori(view.getKategoriCB().getSelectedItem().toString());
         
         String nama = model.getNama();
         int kuantitas = model.getKuantitas();
+        String harga = model.getHarga();
         String deskripsi = model.getDeskripsi();
         String kategori = model.getKategori();
 
-        if (new productDB().update(id, nama, kuantitas, deskripsi, kategori)) {
+        if (new productDB().update(id, nama, harga, kuantitas, deskripsi, kategori)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
 
             //CLEAR TEXT

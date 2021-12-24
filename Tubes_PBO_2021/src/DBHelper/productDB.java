@@ -15,6 +15,7 @@ public class productDB {
         DefaultTableModel dm = new DefaultTableModel();
         dm.addColumn("ID");
         dm.addColumn("Nama");
+        dm.addColumn("Harga");
         dm.addColumn("Kuantitas");
         dm.addColumn("Deskripsi");
         dm.addColumn("Kategori");
@@ -34,11 +35,12 @@ public class productDB {
                 //GET VALUES
                 String id = rs.getString(1);
                 String nama = rs.getString(2);
-                String kuantitas = rs.getString(3);
-                String deskripsi = rs.getString(4);
-                String kategori = rs.getString(5);
+                String harga = rs.getString(3);
+                String kuantitas = rs.getString(4);
+                String deskripsi = rs.getString(5);
+                String kategori = rs.getString(6);
 
-                dm.addRow(new String[]{id, nama, kuantitas, deskripsi, kategori});
+                dm.addRow(new String[]{id, nama, harga, kuantitas, deskripsi, kategori});
             }
 
             return dm;
@@ -52,9 +54,9 @@ public class productDB {
 
     }
     
-    public Boolean add(int id, String nama, int kuantitas, String deskripsi, String kategori) {
+    public Boolean add(int id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
         //SQL STATEMENT
-        String sql = "INSERT INTO produk(id, nama, kuantitas, deskripsi, kategori) VALUES ('"+id+"','"+nama+"','"+kuantitas+"','"+deskripsi+"','"+kategori+"')";
+        String sql = "INSERT INTO produk(id, nama, harga, kuantitas, deskripsi, kategori) VALUES ('"+id+"','"+nama+"', '"+harga+"','"+kuantitas+"','"+deskripsi+"','"+kategori+"')";
 
         try {
             //GET COONECTION
@@ -74,9 +76,9 @@ public class productDB {
         return false;
     }
     
-    public Boolean update(String id, String nama, int kuantitas, String deskripsi, String kategori) {
+    public Boolean update(String id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
         //SQL STMT
-        String sql = "UPDATE produk SET `nama`='"+nama+"', `kuantitas`='"+kuantitas+"', `deskripsi`='"+deskripsi+"', `kategori`='"+kategori+"' WHERE ID='"+id+"'";
+        String sql = "UPDATE produk SET `nama`='"+nama+"', `harga`='"+harga+"', `kuantitas`='"+kuantitas+"', `deskripsi`='"+deskripsi+"', `kategori`='"+kategori+"' WHERE ID='"+id+"'";
 
         try {
             //GET COONECTION
