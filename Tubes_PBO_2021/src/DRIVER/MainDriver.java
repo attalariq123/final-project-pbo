@@ -3,8 +3,7 @@ package DRIVER;
 import CONTROLLER.*;
 import MODEL.*;
 import VIEW.*;
-import com.formdev.flatlaf.intellijthemes.FlatHiberbeeDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.*;
+import com.formdev.flatlaf.intellijthemes.*;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
