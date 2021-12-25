@@ -78,7 +78,7 @@ public class AdminController {
 
         if (a == JOptionPane.YES_OPTION) {
             view.dispose();
-            UserModel m = new UserModel("", "");
+            AdminModel m = new AdminModel("", "");
             LoginForm v = new LoginForm();
             LoginController c = new LoginController(m, v);
             c.initController();

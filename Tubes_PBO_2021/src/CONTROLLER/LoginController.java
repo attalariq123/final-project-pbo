@@ -1,7 +1,7 @@
 package CONTROLLER;
 
 import DBHelper.KoneksiDB;
-import MODEL.UserModel;
+import MODEL.AdminModel;
 import VIEW.AdminHome;
 import VIEW.CashierHome;
 import VIEW.LoginForm;
@@ -12,10 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoginController {
-    private final UserModel model;
+    private final AdminModel model;
     private final LoginForm view;
     
-    public LoginController(UserModel m, LoginForm v) {
+    public LoginController(AdminModel m, LoginForm v) {
         model = m;
         view = v;
         initView();
