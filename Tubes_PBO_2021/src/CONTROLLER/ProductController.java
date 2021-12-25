@@ -1,6 +1,7 @@
 package CONTROLLER;
 
 import DBHelper.productDB;
+import MODEL.CategoryModel;
 import MODEL.ProductModel;
 import VIEW.ProductMenu;
 import java.awt.event.ActionEvent;
@@ -68,14 +69,15 @@ public class ProductController {
         model.setHarga(view.getHargaText().getText());
         model.setKuantitas(Integer.parseInt(view.getKuantitasText().getText()));
         model.setDeskripsi(view.getDeskripsiText().getText());
-        model.setKategori(view.getKategoriCB().getSelectedItem().toString());
+        model.setKategori(new CategoryModel(view.getKategoriCB().getSelectedIndex(), view.getKategoriCB().getSelectedItem().toString()));
         
         int id = model.getId();
         String nama = model.getNama();
         String harga = model.getHarga();
         int kuantitas = model.getKuantitas();
         String deskripsi = model.getDeskripsi();
-        String kategori = model.getKategori();
+        CategoryModel cat = model.getKategori();
+        String kategori = cat.getNama_kategori();
         
         if (new productDB().createData(id, nama, harga, kuantitas, deskripsi, kategori)) {
             JOptionPane.showMessageDialog(null, "Insert Produk Berhasil");
@@ -121,13 +123,14 @@ public class ProductController {
         model.setHarga(view.getHargaText().getText());
         model.setKuantitas(Integer.parseInt(view.getKuantitasText().getText()));
         model.setDeskripsi(view.getDeskripsiText().getText());
-        model.setKategori(view.getKategoriCB().getSelectedItem().toString());
+        model.setKategori(new CategoryModel(view.getKategoriCB().getSelectedIndex(), view.getKategoriCB().getSelectedItem().toString()));
         
         String nama = model.getNama();
         int kuantitas = model.getKuantitas();
         String harga = model.getHarga();
         String deskripsi = model.getDeskripsi();
-        String kategori = model.getKategori();
+        CategoryModel cat = model.getKategori();
+        String kategori = cat.getNama_kategori();
 
         if (new productDB().updateData(id, nama, harga, kuantitas, deskripsi, kategori)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
