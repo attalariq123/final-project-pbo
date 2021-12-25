@@ -40,16 +40,14 @@ public class LoginForm extends JFrame {
         setName("LoginFrame"); // NOI18N
         setResizable(false);
 
-        welcomePanel.setBackground(new java.awt.Color(0, 204, 102));
-
         appsLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        appsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        appsLabel.setForeground(new java.awt.Color(0, 204, 102));
         appsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         appsLabel.setText("Management Inventory Toko");
         appsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         welcomeLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        welcomeLabel.setForeground(new java.awt.Color(0, 204, 102));
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         welcomeLabel.setText("Selamat Datang");
 
@@ -76,19 +74,16 @@ public class LoginForm extends JFrame {
                 .addGap(6, 6, 6))
         );
 
-        loginPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        usernameLabel.setBackground(new java.awt.Color(0, 255, 102));
         usernameLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 16)); // NOI18N
-        usernameLabel.setForeground(new java.awt.Color(0, 204, 102));
         usernameLabel.setText("Username");
 
         passwordLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 16)); // NOI18N
-        passwordLabel.setForeground(new java.awt.Color(0, 204, 102));
         passwordLabel.setText("Password");
 
+        usernameText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         usernameText.setToolTipText("Your Username");
 
+        passwordText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passwordText.setToolTipText("Your Password");
 
         loginButton.setBackground(new java.awt.Color(0, 204, 102));
@@ -96,9 +91,7 @@ public class LoginForm extends JFrame {
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Login");
 
-        clearButton.setBackground(new java.awt.Color(0, 204, 102));
         clearButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
-        clearButton.setForeground(new java.awt.Color(255, 255, 255));
         clearButton.setText("Clear");
 
         javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);

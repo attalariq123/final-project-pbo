@@ -30,15 +30,12 @@ public class AdminHome extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1300, 700));
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
-
         appLabel1.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
-        appLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        appLabel1.setForeground(new java.awt.Color(0, 204, 102));
         appLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         appLabel1.setText("Manajemen Inventory Toko");
 
         welcomeLabel1.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
-        welcomeLabel1.setForeground(new java.awt.Color(255, 255, 255));
         welcomeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         welcomeLabel1.setText("Menu Admin");
         welcomeLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -65,8 +62,6 @@ public class AdminHome extends javax.swing.JFrame {
                 .addComponent(welcomeLabel1)
                 .addGap(4, 4, 4))
         );
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         productButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
         productButton.setForeground(new java.awt.Color(0, 204, 102));
