@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class productDB {
     
-    public DefaultTableModel getData() {
+    public DefaultTableModel readData() {
         //ADD COLUMNS TO TABLE MODEL
         DefaultTableModel dm = new DefaultTableModel();
         dm.addColumn("ID");
@@ -54,7 +54,7 @@ public class productDB {
 
     }
     
-    public Boolean add(int id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
+    public Boolean createData(int id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
         //SQL STATEMENT
         String sql = "INSERT INTO produk(id, nama, harga, kuantitas, deskripsi, kategori) VALUES ('"+id+"','"+nama+"', '"+harga+"','"+kuantitas+"','"+deskripsi+"','"+kategori+"')";
 
@@ -76,7 +76,7 @@ public class productDB {
         return false;
     }
     
-    public Boolean update(String id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
+    public Boolean updateData(String id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
         //SQL STMT
         String sql = "UPDATE produk SET `nama`='"+nama+"', `harga`='"+harga+"', `kuantitas`='"+kuantitas+"', `deskripsi`='"+deskripsi+"', `kategori`='"+kategori+"' WHERE ID='"+id+"'";
 
@@ -99,7 +99,7 @@ public class productDB {
         }
     }
     
-    public Boolean delete(String id) {
+    public Boolean deleteData(String id) {
          //SQL STMT
         String sql="DELETE FROM produk WHERE ID ='"+id+"'";
 

@@ -244,7 +244,7 @@ public class CategoryMenu extends javax.swing.JFrame {
     }
     
     public void fetchDataCategory() {
-        DefaultTableModel dm = new categoryDB().getData();
+        DefaultTableModel dm = new categoryDB().readData();
         categoryTable.setModel(dm);
     }
     

@@ -77,7 +77,7 @@ public class ProductController {
         String deskripsi = model.getDeskripsi();
         String kategori = model.getKategori();
         
-        if (new productDB().add(id, nama, harga, kuantitas, deskripsi, kategori)) {
+        if (new productDB().createData(id, nama, harga, kuantitas, deskripsi, kategori)) {
             JOptionPane.showMessageDialog(null, "Insert Produk Berhasil");
 
             //CLEAR TEXTFIELD
@@ -98,7 +98,7 @@ public class ProductController {
             int index = view.getProductTable().getSelectedRow();
             String id = view.getProductTable().getValueAt(index, 0).toString();
 
-            if (new productDB().delete(id)) {
+            if (new productDB().deleteData(id)) {
                 JOptionPane.showMessageDialog(null, "Delete Berhasil");
 
                 //CLEAR TXT
@@ -129,7 +129,7 @@ public class ProductController {
         String deskripsi = model.getDeskripsi();
         String kategori = model.getKategori();
 
-        if (new productDB().update(id, nama, harga, kuantitas, deskripsi, kategori)) {
+        if (new productDB().updateData(id, nama, harga, kuantitas, deskripsi, kategori)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
 
             //CLEAR TEXT

@@ -8,9 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-public class categoryDB {
+public class categoryDB  {
     
-    public DefaultTableModel getData() {
+    public DefaultTableModel readData() {
         //ADD COLUMNS TO TABLE MODEL
         DefaultTableModel dm = new DefaultTableModel();
         dm.addColumn("ID");
@@ -45,8 +45,8 @@ public class categoryDB {
         return null;
 
     }
-    
-    public Boolean add(int id, String nama) {
+   
+    public Boolean createData(int id, String nama) {
         //SQL STATEMENT
         String sql = "INSERT INTO `kategori produk`(id, nama) VALUES ('"+id+"','"+nama+"')";
 
@@ -58,7 +58,7 @@ public class categoryDB {
             Statement s = con.prepareStatement(sql);
 
             s.execute(sql);
-
+            
             return true;
 
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class categoryDB {
         return false;
     }
     
-    public Boolean update(String id, String nama) {
+    public Boolean updateData(String id, String nama) {
         //SQL STMT
         String sql = "UPDATE `kategori produk` SET `nama`='"+nama+"' WHERE ID='"+id+"'";
 
@@ -91,7 +91,7 @@ public class categoryDB {
         }
     }
     
-    public Boolean delete(String id) {
+    public Boolean deleteData(String id) {
          //SQL STMT
         String sql="DELETE FROM `kategori produk` WHERE ID ='"+id+"'";
 

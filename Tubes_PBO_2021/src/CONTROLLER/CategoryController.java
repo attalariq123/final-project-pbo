@@ -65,7 +65,7 @@ public class CategoryController {
         int id = model.getID();
         String nama = model.getNama_kategori();
         
-        if (new categoryDB().add(id, nama)) {
+        if (new categoryDB().createData(id, nama)) {
             JOptionPane.showMessageDialog(null, "Insert Kategori Berhasil");
 
             //CLEAR TEXTFIELD
@@ -86,7 +86,7 @@ public class CategoryController {
             int index = view.getCategoryTable().getSelectedRow();
             String id = view.getCategoryTable().getValueAt(index, 0).toString();
 
-            if (new categoryDB().delete(id)) {
+            if (new categoryDB().deleteData(id)) {
                 JOptionPane.showMessageDialog(null, "Delete Berhasil");
 
                 //CLEAR TXT
@@ -109,7 +109,7 @@ public class CategoryController {
         
         String nama = model.getNama_kategori();
 
-        if (new categoryDB().update(id, nama)) {
+        if (new categoryDB().updateData(id, nama)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
 
             //CLEAR TEXT
