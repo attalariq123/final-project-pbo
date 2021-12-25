@@ -1,6 +1,8 @@
 package VIEW;
 
 import CONTROLLER.AdminController;
+import DBHelper.KoneksiDB;
+import java.sql.*;
 import DBHelper.productDB;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ public class ProductMenu extends javax.swing.JFrame {
     public ProductMenu() {
         initComponents();
         fetchDataProduct();
+        fillCategoryCB();
     }
 
     @SuppressWarnings("unchecked")
@@ -119,7 +122,6 @@ public class ProductMenu extends javax.swing.JFrame {
         deskripsiText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         kategoriCB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        kategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Makanan", "Elektronik" }));
 
         addButton.setBackground(new java.awt.Color(0, 204, 102));
         addButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
@@ -285,6 +287,24 @@ public class ProductMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
+    public void fillCategoryCB() {
+        try{
+            Connection con = KoneksiDB.getKoneksi();
+            String sql = "SELECT * FROM `kategori produk`";
+            //PREPARED STMT
+            Statement s = con.prepareStatement(sql);
+            ResultSet rs = s.executeQuery(sql);
+            
+            while(rs.next()) {
+                String nama = rs.getString("nama");
+                kategoriCB.addItem(nama);
+            }
+
+        } catch(SQLException e){
+            System.out.println(e);
+        }
+    }
+    
     private void productTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTableMouseClicked
         // TODO add your handling code here:
         String id = getProductTable().getValueAt(getProductTable().getSelectedRow(), 0).toString();
@@ -311,7 +331,7 @@ public class ProductMenu extends javax.swing.JFrame {
     }
     
     public void fetchDataProduct() {
-        DefaultTableModel dm = new productDB().getData();
+        DefaultTableModel dm = new productDB().readData();
         productTable.setModel(dm);
     }
     
