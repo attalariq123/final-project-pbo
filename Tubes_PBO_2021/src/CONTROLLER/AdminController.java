@@ -1,13 +1,8 @@
 package CONTROLLER;
 
 
-import MODEL.CategoryModel;
-import MODEL.ProductModel;
-import MODEL.UserModel;
-import VIEW.AdminHome;
-import VIEW.CategoryMenu;
-import VIEW.LoginForm;
-import VIEW.ProductMenu;
+import MODEL.*;
+import VIEW.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -43,7 +38,7 @@ public class AdminController {
                     categoryMenu();
                     break;
                 case "CUSTOMER":
-                    productMenu();
+                    customerMenu();
                     break;
                 case "CASHIER":
                     productMenu();
@@ -67,6 +62,14 @@ public class AdminController {
         ProductMenu v = new ProductMenu();
         ProductModel m = new ProductModel();
         ProductController c = new ProductController(m, v);
+        c.initController();
+    }
+    
+    public void customerMenu() {
+        view.dispose();
+        CustomerMenu v = new CustomerMenu();
+        CustomerModel m = new CustomerModel();
+        CustomerController c = new CustomerController(m, v);
         c.initController();
     }
     
