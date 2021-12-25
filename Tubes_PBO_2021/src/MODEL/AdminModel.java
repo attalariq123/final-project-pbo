@@ -9,11 +9,11 @@ package MODEL;
  *
  * @author attal
  */
-public class UserModel {
+public class AdminModel {
     private String username;
     private String password;
     
-    public UserModel(String u, String p) {
+    public AdminModel(String u, String p) {
         this.username = u;
         this.password = p;
     }

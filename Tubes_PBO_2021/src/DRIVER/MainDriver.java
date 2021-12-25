@@ -11,7 +11,7 @@ public class MainDriver {
     public static void main(String[] args){
         try {
             UIManager.setLookAndFeel(new FlatHiberbeeDarkIJTheme());
-            UserModel m = new UserModel("", "");
+            AdminModel m = new AdminModel("", "");
             LoginForm v = new LoginForm();
             LoginController c = new LoginController(m, v);
             c.initController();
