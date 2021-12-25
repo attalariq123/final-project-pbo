@@ -41,12 +41,20 @@ public class AdminController {
                     customerMenu();
                     break;
                 case "CASHIER":
-                    productMenu();
+                    cashierMenu();
                     break;
                 default:
                     break;
             }
         }
+    }
+    
+    public void cashierMenu() {
+        view.dispose();
+        CashierMenu v = new CashierMenu();
+        CashierModel m = new CashierModel();
+        CashierController c = new CashierController(m, v);
+        c.initController();
     }
     
     public void categoryMenu() {

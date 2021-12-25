@@ -6,19 +6,21 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class customerDB {
+public class cashierDB {
     
     public DefaultTableModel readData() {
         //ADD COLUMNS TO TABLE MODEL
         DefaultTableModel dm = new DefaultTableModel();
         dm.addColumn("ID");
+        dm.addColumn("Username");
+        dm.addColumn("Password");
         dm.addColumn("Nama");
         dm.addColumn("Umur");
         dm.addColumn("Alamat");
         dm.addColumn("No Telp");
 
         //SQL STATEMENT
-        String sql = "SELECT * FROM customer";
+        String sql = "SELECT * FROM cashier";
 
         try {
             Connection con = KoneksiDB.getKoneksi();
@@ -35,24 +37,26 @@ public class customerDB {
                 String umur = rs.getString(3);
                 String alamat = rs.getString(4);
                 String telp = rs.getString(5);
+                String username = rs.getString(6);
+                String password = rs.getString(7);
 
-                dm.addRow(new String[]{id, nama, umur, alamat, telp});
+                dm.addRow(new String[]{id, username, password, nama, umur, alamat, telp});
             }
 
             return dm;
 
         } catch (SQLException e) {
             System.out.println("Fetching Data Failed");
-            Logger.getLogger(customerDB.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(cashierDB.class.getName()).log(Level.SEVERE, null, e);
         }
 
         return null;
 
     }
     
-    public Boolean createData(int id, String nama, String umur, String alamat, String telp) {
+    public Boolean createData(int id, String nama, String umur, String alamat, String telp, String username, String password) {
         //SQL STATEMENT
-        String sql = "INSERT INTO customer(id, nama, umur, alamat, `no telp`) VALUES ('"+id+"','"+nama+"', '"+umur+"','"+alamat+"','"+telp+"')";
+        String sql = "INSERT INTO cashier(id, nama, umur, alamat, `no telp`, username, password) VALUES ('"+id+"','"+nama+"', '"+umur+"','"+alamat+"','"+telp+"', '"+username+"', '"+password+"')";
 
         try {
             //GET COONECTION
@@ -67,15 +71,15 @@ public class customerDB {
 
         } catch (SQLException e) {
             //Logger.getLogger(productDB.class.getName()).log(Level.SEVERE, null, e);
-            System.out.println("add customer failed");
+            System.out.println("add cashier failed");
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return false;
     }
     
-    public Boolean updateData(String id, String nama, String umur, String alamat, String telp) {
+    public Boolean updateData(String id, String nama, String umur, String alamat, String telp, String username, String password) {
         //SQL STMT
-        String sql = "UPDATE customer SET `nama`='"+nama+"', `umur`='"+umur+"', `alamat`='"+alamat+"', `no telp`='"+telp+"' WHERE ID='"+id+"'";
+        String sql = "UPDATE cashier SET `nama`='"+nama+"', `umur`='"+umur+"', `alamat`='"+alamat+"', `no telp`='"+telp+"',`username`='"+username+"', `password`='"+password+"' WHERE ID='"+id+"'";
 
         try {
             //GET COONECTION
@@ -90,15 +94,15 @@ public class customerDB {
             return true;
 
         } catch (SQLException e) {
-            Logger.getLogger(customerDB.class.getName()).log(Level.SEVERE, null, e);
-            System.out.println("Edit customer failed");
+            Logger.getLogger(cashierDB.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Edit cashier failed");
             return false;
         }
     }
     
     public Boolean deleteData(String id) {
          //SQL STMT
-        String sql="DELETE FROM customer WHERE ID ='"+id+"'";
+        String sql="DELETE FROM cashier WHERE ID ='"+id+"'";
 
         try {
             //GET COONECTION
@@ -113,8 +117,8 @@ public class customerDB {
             return true;
 
         }catch(SQLException e) {
-            Logger.getLogger(customerDB.class.getName()).log(Level.SEVERE, null, e);
-            System.out.println("Delete customer failed");
+            Logger.getLogger(cashierDB.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Delete cashier failed");
             return false;
         }
     }

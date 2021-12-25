@@ -78,7 +78,7 @@ public class CustomerController {
 
             //CLEAR TEXTFIELD
             clearFields();
-            view.fetchDataProduct();
+            view.fetchDataCustomer();
             
         } else {
             System.out.println("add data error");
@@ -136,6 +136,6 @@ public class CustomerController {
     }
     
     public void refreshData() {
-        view.fetchDataProduct();
+        view.fetchDataCustomer();
     }
 }

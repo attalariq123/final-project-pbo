@@ -1,17 +1,17 @@
 package CONTROLLER;
 
-import DBHelper.customerDB;
-import MODEL.CustomerModel;
-import VIEW.CustomerMenu;
+import DBHelper.cashierDB;
+import MODEL.CashierModel;
+import VIEW.CashierMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-public class CustomerController {
-    private final CustomerModel model;
-    private final CustomerMenu view;
+public class CashierController {
+    private final CashierModel model;
+    private final CashierMenu view;
     
-    public CustomerController(CustomerModel m, CustomerMenu v) {
+    public CashierController(CashierModel m, CashierMenu v) {
         model = m;
         view = v;
         initView();
@@ -22,7 +22,7 @@ public class CustomerController {
     }
     
     public void initController() {
-        view.CustomerButtonListener(new ButtonListener());
+        view.CashierButtonListener(new ButtonListener());
     }
     
     public class ButtonListener implements ActionListener {
@@ -54,6 +54,8 @@ public class CustomerController {
     
     public void clearFields() {
         view.getIdText().setText("");
+        view.getUsernameText().setText("");
+        view.getPasswordText().setText("");
         view.getNamaText().setText("");
         view.getUmurText().setText("");
         view.getAlamatText().setText("");
@@ -62,23 +64,27 @@ public class CustomerController {
     
     public void addData() {
         model.setId(Integer.parseInt(view.getIdText().getText()));
+        model.setUsername(view.getUsernameText().getText());
+        model.setPassword(view.getPasswordText().getText());
         model.setNama(view.getNamaText().getText());
         model.setUmur(view.getUmurText().getText());
         model.setAlamat(view.getAlamatText().getText());
         model.setNomorTelp(view.getTelpText().getText());
         
         int id = model.getId();
+        String username = model.getUsername();
+        String password = model.getPassword();
         String nama = model.getNama();
         String umur = model.getUmur();
         String alamat = model.getAlamat();
         String telp = model.getNomorTelp();
         
-        if (new customerDB().createData(id, nama, umur, alamat, telp)) {
-            JOptionPane.showMessageDialog(null, "Insert Customer Berhasil");
+        if (new cashierDB().createData(id, nama, umur, alamat, telp, username, password)) {
+            JOptionPane.showMessageDialog(null, "Insert User Cashier Berhasil");
 
             //CLEAR TEXTFIELD
             clearFields();
-            view.fetchDataProduct();
+            view.fetchDataCashier();
             
         } else {
             System.out.println("add data error");
@@ -91,10 +97,10 @@ public class CustomerController {
         int answ = JOptionPane.showOptionDialog(null, "Anda yakin ingin menghapus?", "Delete Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
         if (answ == 0) {
-            int index = view.getCustomerTable().getSelectedRow();
-            String id = view.getCustomerTable().getValueAt(index, 0).toString();
+            int index = view.getCashierTable().getSelectedRow();
+            String id = view.getCashierTable().getValueAt(index, 0).toString();
 
-            if (new customerDB().deleteData(id)) {
+            if (new cashierDB().deleteData(id)) {
                 JOptionPane.showMessageDialog(null, "Delete Berhasil");
 
                 //CLEAR TXT
@@ -109,21 +115,25 @@ public class CustomerController {
     }
     
     public void updateData() {
-        int index = view.getCustomerTable().getSelectedRow();
-        String id = view.getCustomerTable().getValueAt(index, 0).toString();
+        int index = view.getCashierTable().getSelectedRow();
+        String id = view.getCashierTable().getValueAt(index, 0).toString();
         
         model.setId(Integer.parseInt(view.getIdText().getText()));
+        model.setUsername(view.getUsernameText().getText());
+        model.setPassword(view.getPasswordText().getText());
         model.setNama(view.getNamaText().getText());
         model.setUmur(view.getUmurText().getText());
         model.setAlamat(view.getAlamatText().getText());
         model.setNomorTelp(view.getTelpText().getText());
         
+        String username = model.getUsername();
+        String password = model.getPassword();
         String nama = model.getNama();
         String umur = model.getUmur();
         String alamat = model.getAlamat();
         String telp = model.getNomorTelp();
 
-        if (new customerDB().updateData(id, nama, umur, alamat, telp)) {
+        if (new cashierDB().updateData(id, nama, umur, alamat, telp, username, password)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
 
             //CLEAR TEXT
@@ -136,6 +146,6 @@ public class CustomerController {
     }
     
     public void refreshData() {
-        view.fetchDataProduct();
+        view.fetchDataCashier();
     }
 }

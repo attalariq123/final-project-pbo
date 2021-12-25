@@ -1,18 +1,19 @@
 package VIEW;
 
 import CONTROLLER.AdminController;
-import DBHelper.customerDB;
+import DBHelper.cashierDB;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class CustomerMenu extends javax.swing.JFrame {
+public class CashierMenu extends javax.swing.JFrame {
 
-    public CustomerMenu() {
+    public CashierMenu() {
         initComponents();
-        fetchDataProduct();
+        fetchDataCashier();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,10 +37,14 @@ public class CustomerMenu extends javax.swing.JFrame {
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        customerTable = new javax.swing.JTable();
+        cashierTable = new javax.swing.JTable();
         clearButton = new javax.swing.JButton();
         umurText = new javax.swing.JTextField();
         umurLabel = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
+        passwordText = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        usernameText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manage Customer");
@@ -49,7 +54,7 @@ public class CustomerMenu extends javax.swing.JFrame {
         welcomeLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(0, 204, 102));
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        welcomeLabel.setText("Manage Customer");
+        welcomeLabel.setText("Manage Cashier");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         backButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
@@ -126,33 +131,33 @@ public class CustomerMenu extends javax.swing.JFrame {
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Delete");
 
-        customerTable.setAutoCreateRowSorter(true);
-        customerTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        customerTable.setModel(new javax.swing.table.DefaultTableModel(
+        cashierTable.setAutoCreateRowSorter(true);
+        cashierTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cashierTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nama", "Umur", "Alamat", "No Telp"
+                "ID", "Username", "Password", "Nama", "Umur", "Alamat", "No Telp"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
+                false, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        customerTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        customerTable.setRowHeight(26);
-        customerTable.setRowMargin(4);
-        customerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        cashierTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cashierTable.setRowHeight(26);
+        cashierTable.setRowMargin(4);
+        cashierTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                customerTableMouseClicked(evt);
+                cashierTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(customerTable);
+        jScrollPane1.setViewportView(cashierTable);
 
         clearButton.setBackground(new java.awt.Color(0, 204, 102));
         clearButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
@@ -164,6 +169,18 @@ public class CustomerMenu extends javax.swing.JFrame {
         umurLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
         umurLabel.setForeground(new java.awt.Color(0, 204, 102));
         umurLabel.setText("Umur");
+
+        usernameLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(0, 204, 102));
+        usernameLabel.setText("Username");
+
+        passwordText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        passwordLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(0, 204, 102));
+        passwordLabel.setText("Password");
+
+        usernameText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,9 +194,7 @@ public class CustomerMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(umurText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(IdLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(namaLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(IdLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(namaText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,30 +214,53 @@ public class CustomerMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(telpText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(alamatText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                            .addComponent(alamatText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameLabel)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(passwordLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(usernameText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(namaLabel)))
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(IdLabel)
                             .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usernameText, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passwordLabel))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
+                                .addGap(9, 9, 9)
                                 .addComponent(namaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(namaText)))
+                            .addComponent(namaText, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(umurLabel)
@@ -241,22 +279,25 @@ public class CustomerMenu extends javax.swing.JFrame {
                             .addComponent(editButton)
                             .addComponent(deleteButton)
                             .addComponent(clearButton))))
-                .addGap(11, 11, 11))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -271,22 +312,26 @@ public class CustomerMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
     
-    private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
+    private void cashierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cashierTableMouseClicked
         // TODO add your handling code here:
-        String id = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 0).toString();
-        String nama = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 1).toString();
-        String umur = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 2).toString();
-        String alamat = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 3).toString();
-        String telp = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 4).toString();
+        String id = getCashierTable().getValueAt(getCashierTable().getSelectedRow(), 0).toString();
+        String username = getCashierTable().getValueAt(getCashierTable().getSelectedRow(), 1).toString();
+        String password = getCashierTable().getValueAt(getCashierTable().getSelectedRow(), 2).toString();
+        String nama = getCashierTable().getValueAt(getCashierTable().getSelectedRow(), 3).toString();
+        String umur = getCashierTable().getValueAt(getCashierTable().getSelectedRow(), 4).toString();
+        String alamat = getCashierTable().getValueAt(getCashierTable().getSelectedRow(), 5).toString();
+        String telp = getCashierTable().getValueAt(getCashierTable().getSelectedRow(), 6).toString();
 
         getIdText().setText(id);
+        getUsernameText().setText(username);
+        getPasswordText().setText(password);
         getNamaText().setText(nama);
         getUmurText().setText(umur);
         getAlamatText().setText(alamat);
         getTelpText().setText(telp);
-    }//GEN-LAST:event_customerTableMouseClicked
+    }//GEN-LAST:event_cashierTableMouseClicked
 
-    public void CustomerButtonListener(ActionListener buttonListener) {
+    public void CashierButtonListener(ActionListener buttonListener) {
         clearButton.addActionListener(buttonListener);
         addButton.addActionListener(buttonListener);
         editButton.addActionListener(buttonListener);
@@ -294,9 +339,9 @@ public class CustomerMenu extends javax.swing.JFrame {
         refreshButton.addActionListener(buttonListener);
     }
     
-    public void fetchDataProduct() {
-        DefaultTableModel dm = new customerDB().readData();
-        customerTable.setModel(dm);
+    public void fetchDataCashier() {
+        DefaultTableModel dm = new cashierDB().readData();
+        cashierTable.setModel(dm);
     }
     
     
@@ -306,8 +351,8 @@ public class CustomerMenu extends javax.swing.JFrame {
     private javax.swing.JLabel alamatLabel;
     private javax.swing.JTextField alamatText;
     private javax.swing.JButton backButton;
+    private javax.swing.JTable cashierTable;
     private javax.swing.JButton clearButton;
-    private javax.swing.JTable customerTable;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JTextField idText;
@@ -316,11 +361,15 @@ public class CustomerMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel namaLabel;
     private javax.swing.JTextField namaText;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JTextField passwordText;
     private javax.swing.JButton refreshButton;
     private javax.swing.JLabel telpLabel;
     private javax.swing.JTextField telpText;
     private javax.swing.JLabel umurLabel;
     private javax.swing.JTextField umurText;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JTextField usernameText;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -346,6 +395,14 @@ public class CustomerMenu extends javax.swing.JFrame {
 
     public void setBackButton(JButton backButton) {
         this.backButton = backButton;
+    }
+
+    public JTable getCashierTable() {
+        return cashierTable;
+    }
+
+    public void setCashierTable(JTable cashierTable) {
+        this.cashierTable = cashierTable;
     }
 
     public JButton getClearButton() {
@@ -388,12 +445,20 @@ public class CustomerMenu extends javax.swing.JFrame {
         this.namaText = namaText;
     }
 
-    public JTable getCustomerTable() {
-        return customerTable;
+    public JLabel getPasswordLabel() {
+        return passwordLabel;
     }
 
-    public void setCustomerTable(JTable customerTable) {
-        this.customerTable = customerTable;
+    public void setPasswordLabel(JLabel passwordLabel) {
+        this.passwordLabel = passwordLabel;
+    }
+
+    public JTextField getPasswordText() {
+        return passwordText;
+    }
+
+    public void setPasswordText(JTextField passwordText) {
+        this.passwordText = passwordText;
     }
 
     public JButton getRefreshButton() {
@@ -420,5 +485,14 @@ public class CustomerMenu extends javax.swing.JFrame {
         this.umurText = umurText;
     }
 
+    public JTextField getUsernameText() {
+        return usernameText;
+    }
+
+    public void setUsernameText(JTextField usernameText) {
+        this.usernameText = usernameText;
+    }
+
+    
     
 }

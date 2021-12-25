@@ -12,7 +12,7 @@ public class CustomerMenu extends javax.swing.JFrame {
 
     public CustomerMenu() {
         initComponents();
-        fetchDataProduct();
+        fetchDataCustomer();
     }
 
     @SuppressWarnings("unchecked")
@@ -294,7 +294,7 @@ public class CustomerMenu extends javax.swing.JFrame {
         refreshButton.addActionListener(buttonListener);
     }
     
-    public void fetchDataProduct() {
+    public void fetchDataCustomer() {
         DefaultTableModel dm = new customerDB().readData();
         customerTable.setModel(dm);
     }
