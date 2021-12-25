@@ -6,9 +6,9 @@ public class ProductModel {
     private String harga;
     private int kuantitas;
     private String deskripsi;
-    private String kategori;
+    private CategoryModel kategori;
 
-    public ProductModel(int id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
+    public ProductModel(int id, String nama, String harga, int kuantitas, String deskripsi, CategoryModel kategori) {
         this.id = id;
         this.nama = nama;
         this.harga = harga;
@@ -59,11 +59,11 @@ public class ProductModel {
         this.deskripsi = deskripsi;
     }
 
-    public String getKategori() {
+    public CategoryModel getKategori() {
         return kategori;
     }
 
-    public void setKategori(String kategori) {
+    public void setKategori(CategoryModel kategori) {
         this.kategori = kategori;
     }
 }
