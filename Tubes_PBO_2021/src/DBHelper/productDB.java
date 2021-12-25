@@ -1,11 +1,9 @@
 package DBHelper;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class productDB {
@@ -70,8 +68,9 @@ public class productDB {
             return true;
 
         } catch (SQLException e) {
-            Logger.getLogger(productDB.class.getName()).log(Level.SEVERE, null, e);
+            //Logger.getLogger(productDB.class.getName()).log(Level.SEVERE, null, e);
             System.out.println("add product failed");
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return false;
     }
