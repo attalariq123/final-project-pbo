@@ -49,17 +49,13 @@ public class ProductMenu extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        jPanel2.setBackground(new java.awt.Color(0, 204, 102));
-
-        welcomeLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
-        welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        welcomeLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
+        welcomeLabel.setForeground(new java.awt.Color(0, 204, 102));
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        welcomeLabel.setText("Manajemen Produk");
+        welcomeLabel.setText("Manage Product");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        backButton.setBackground(new java.awt.Color(255, 255, 255));
         backButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
-        backButton.setForeground(new java.awt.Color(0, 204, 102));
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,9 +63,7 @@ public class ProductMenu extends javax.swing.JFrame {
             }
         });
 
-        refreshButton.setBackground(new java.awt.Color(255, 255, 255));
         refreshButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
-        refreshButton.setForeground(new java.awt.Color(0, 204, 102));
         refreshButton.setText("Refresh Data");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -96,8 +90,6 @@ public class ProductMenu extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
         IdLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
         IdLabel.setForeground(new java.awt.Color(0, 204, 102));
         IdLabel.setText("ID");
@@ -118,6 +110,15 @@ public class ProductMenu extends javax.swing.JFrame {
         KategoriLabel.setForeground(new java.awt.Color(0, 204, 102));
         KategoriLabel.setText("Kategori");
 
+        idText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        namaText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        kuantitasText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        deskripsiText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        kategoriCB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         kategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Makanan", "Elektronik" }));
 
         addButton.setBackground(new java.awt.Color(0, 204, 102));
@@ -136,7 +137,7 @@ public class ProductMenu extends javax.swing.JFrame {
         deleteButton.setText("Delete");
 
         productTable.setAutoCreateRowSorter(true);
-        productTable.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        productTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         productTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -144,20 +145,35 @@ public class ProductMenu extends javax.swing.JFrame {
             new String [] {
                 "ID", "Nama", "Harga", "Kuantitas", "Deskripsi", "Kategori"
             }
-        ));
-        productTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        productTable.setSelectionBackground(new java.awt.Color(0, 204, 102));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        productTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        productTable.setRowHeight(26);
+        productTable.setRowMargin(4);
         productTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 productTableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(productTable);
+        if (productTable.getColumnModel().getColumnCount() > 0) {
+            productTable.getColumnModel().getColumn(0).setResizable(false);
+            productTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
         clearButton.setBackground(new java.awt.Color(0, 204, 102));
         clearButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         clearButton.setForeground(new java.awt.Color(255, 255, 255));
         clearButton.setText("Clear");
+
+        hargaText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         hargaLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
         hargaLabel.setForeground(new java.awt.Color(0, 204, 102));
@@ -178,7 +194,7 @@ public class ProductMenu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(IdLabel)
-                                .addGap(82, 82, 82))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(NamaLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -212,7 +228,7 @@ public class ProductMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(IdLabel)
@@ -245,8 +261,7 @@ public class ProductMenu extends javax.swing.JFrame {
                             .addComponent(addButton)
                             .addComponent(editButton)
                             .addComponent(deleteButton)
-                            .addComponent(clearButton))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(clearButton))))
                 .addContainerGap())
         );
 
