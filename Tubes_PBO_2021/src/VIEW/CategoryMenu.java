@@ -1,19 +1,18 @@
 package VIEW;
 
 import CONTROLLER.AdminController;
-import DBHelper.productDB;
+import DBHelper.categoryDB;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class ProductMenu extends javax.swing.JFrame {
+public class CategoryMenu extends javax.swing.JFrame {
 
-    public ProductMenu() {
+    public CategoryMenu() {
         initComponents();
-        fetchDataProduct();
+        fetchDataCategory();
     }
 
     @SuppressWarnings("unchecked")
@@ -27,32 +26,24 @@ public class ProductMenu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         IdLabel = new javax.swing.JLabel();
         NamaLabel = new javax.swing.JLabel();
-        KuantitasLabel = new javax.swing.JLabel();
-        DeskripsiLabel = new javax.swing.JLabel();
-        KategoriLabel = new javax.swing.JLabel();
-        idText = new javax.swing.JTextField();
-        namaText = new javax.swing.JTextField();
-        kuantitasText = new javax.swing.JTextField();
-        deskripsiText = new javax.swing.JTextField();
-        kategoriCB = new javax.swing.JComboBox<>();
+        idCatText = new javax.swing.JTextField();
+        namaCatText = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        productTable = new javax.swing.JTable();
+        categoryTable = new javax.swing.JTable();
         clearButton = new javax.swing.JButton();
-        hargaText = new javax.swing.JTextField();
-        hargaLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Manage Product");
+        setTitle("Manage Category");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         welcomeLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(0, 204, 102));
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        welcomeLabel.setText("Manage Product");
+        welcomeLabel.setText("Manage Category");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         backButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
@@ -98,28 +89,9 @@ public class ProductMenu extends javax.swing.JFrame {
         NamaLabel.setForeground(new java.awt.Color(0, 204, 102));
         NamaLabel.setText("Nama");
 
-        KuantitasLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        KuantitasLabel.setForeground(new java.awt.Color(0, 204, 102));
-        KuantitasLabel.setText("Kuantitas");
+        idCatText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        DeskripsiLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        DeskripsiLabel.setForeground(new java.awt.Color(0, 204, 102));
-        DeskripsiLabel.setText("Deskripsi");
-
-        KategoriLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        KategoriLabel.setForeground(new java.awt.Color(0, 204, 102));
-        KategoriLabel.setText("Kategori");
-
-        idText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        namaText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        kuantitasText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        deskripsiText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        kategoriCB.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        kategoriCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Makanan", "Elektronik" }));
+        namaCatText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         addButton.setBackground(new java.awt.Color(0, 204, 102));
         addButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
@@ -136,44 +108,41 @@ public class ProductMenu extends javax.swing.JFrame {
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Delete");
 
-        productTable.setAutoCreateRowSorter(true);
-        productTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        productTable.setModel(new javax.swing.table.DefaultTableModel(
+        categoryTable.setAutoCreateRowSorter(true);
+        categoryTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nama", "Harga", "Kuantitas", "Deskripsi", "Kategori"
+                "ID", "Nama Kategori"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
+                false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        productTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        productTable.setRowHeight(26);
-        productTable.setRowMargin(4);
-        productTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        categoryTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        categoryTable.setRowHeight(26);
+        categoryTable.setRowMargin(4);
+        categoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                productTableMouseClicked(evt);
+                categoryTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(productTable);
+        jScrollPane1.setViewportView(categoryTable);
+        if (categoryTable.getColumnModel().getColumnCount() > 0) {
+            categoryTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
         clearButton.setBackground(new java.awt.Color(0, 204, 102));
         clearButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         clearButton.setForeground(new java.awt.Color(255, 255, 255));
         clearButton.setText("Clear");
-
-        hargaText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        hargaLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        hargaLabel.setForeground(new java.awt.Color(0, 204, 102));
-        hargaLabel.setText("Harga");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -182,18 +151,14 @@ public class ProductMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(hargaLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(hargaText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(IdLabel, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(NamaLabel, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(namaText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(namaCatText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idCatText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(clearButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,20 +166,10 @@ public class ProductMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(KuantitasLabel)
-                            .addComponent(DeskripsiLabel)
-                            .addComponent(KategoriLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deskripsiText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kuantitasText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                        .addComponent(deleteButton)))
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,31 +180,15 @@ public class ProductMenu extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(IdLabel)
-                            .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(idCatText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
                                 .addComponent(NamaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(namaText)))
+                                .addComponent(namaCatText)))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(hargaLabel)
-                            .addComponent(hargaText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(KuantitasLabel)
-                            .addComponent(kuantitasText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DeskripsiLabel)
-                            .addComponent(deskripsiText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(KategoriLabel)
-                            .addComponent(kategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addButton)
                             .addComponent(editButton)
@@ -262,8 +201,8 @@ public class ProductMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,24 +224,18 @@ public class ProductMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
-    private void productTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productTableMouseClicked
+    
+    
+    private void categoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTableMouseClicked
         // TODO add your handling code here:
-        String id = getProductTable().getValueAt(getProductTable().getSelectedRow(), 0).toString();
-        String nama = getProductTable().getValueAt(getProductTable().getSelectedRow(), 1).toString();
-        String harga = getProductTable().getValueAt(getProductTable().getSelectedRow(), 2).toString();
-        String kuantitas = getProductTable().getValueAt(getProductTable().getSelectedRow(), 3).toString();
-        String deskripsi = getProductTable().getValueAt(getProductTable().getSelectedRow(), 4).toString();
-        String kategori = getProductTable().getValueAt(getProductTable().getSelectedRow(), 5).toString();
+        String id = getCategoryTable().getValueAt(getCategoryTable().getSelectedRow(), 0).toString();
+        String nama = getCategoryTable().getValueAt(getCategoryTable().getSelectedRow(), 1).toString();
 
-        getIdText().setText(id);
-        getNamaText().setText(nama);
-        getHargaText().setText(harga);
-        getKuantitasText().setText(kuantitas);
-        getDeskripsiText().setText(deskripsi);
-        getKategoriCB().setSelectedItem(kategori);
-    }//GEN-LAST:event_productTableMouseClicked
+        getIdCatText().setText(id);
+        getNamaCatText().setText(nama);
+    }//GEN-LAST:event_categoryTableMouseClicked
 
-    public void ProductButtonListener(ActionListener buttonListener) {
+    public void CategoryButtonListener(ActionListener buttonListener) {
         clearButton.addActionListener(buttonListener);
         addButton.addActionListener(buttonListener);
         editButton.addActionListener(buttonListener);
@@ -310,34 +243,26 @@ public class ProductMenu extends javax.swing.JFrame {
         refreshButton.addActionListener(buttonListener);
     }
     
-    public void fetchDataProduct() {
-        DefaultTableModel dm = new productDB().getData();
-        productTable.setModel(dm);
+    public void fetchDataCategory() {
+        DefaultTableModel dm = new categoryDB().getData();
+        categoryTable.setModel(dm);
     }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DeskripsiLabel;
     private javax.swing.JLabel IdLabel;
-    private javax.swing.JLabel KategoriLabel;
-    private javax.swing.JLabel KuantitasLabel;
     private javax.swing.JLabel NamaLabel;
     private javax.swing.JButton addButton;
     private javax.swing.JButton backButton;
+    private javax.swing.JTable categoryTable;
     private javax.swing.JButton clearButton;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JTextField deskripsiText;
     private javax.swing.JButton editButton;
-    private javax.swing.JLabel hargaLabel;
-    private javax.swing.JTextField hargaText;
-    private javax.swing.JTextField idText;
+    private javax.swing.JTextField idCatText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> kategoriCB;
-    private javax.swing.JTextField kuantitasText;
-    private javax.swing.JTextField namaText;
-    private javax.swing.JTable productTable;
+    private javax.swing.JTextField namaCatText;
     private javax.swing.JButton refreshButton;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
@@ -350,20 +275,28 @@ public class ProductMenu extends javax.swing.JFrame {
         this.addButton = addButton;
     }
 
-    public JButton getRefreshButton() {
-        return refreshButton;
-    }
-
-    public void setRefreshButton(JButton refreshButton) {
-        this.refreshButton = refreshButton;
-    }
-    
     public JButton getBackButton() {
         return backButton;
     }
 
     public void setBackButton(JButton backButton) {
         this.backButton = backButton;
+    }
+
+    public JTable getCategoryTable() {
+        return categoryTable;
+    }
+
+    public void setCategoryTable(JTable categoryTable) {
+        this.categoryTable = categoryTable;
+    }
+
+    public JButton getClearButton() {
+        return clearButton;
+    }
+
+    public void setClearButton(JButton clearButton) {
+        this.clearButton = clearButton;
     }
 
     public JButton getDeleteButton() {
@@ -374,14 +307,6 @@ public class ProductMenu extends javax.swing.JFrame {
         this.deleteButton = deleteButton;
     }
 
-    public JTextField getDeskripsiText() {
-        return deskripsiText;
-    }
-
-    public void setDeskripsiText(JTextField deskripsiText) {
-        this.deskripsiText = deskripsiText;
-    }
-
     public JButton getEditButton() {
         return editButton;
     }
@@ -389,60 +314,30 @@ public class ProductMenu extends javax.swing.JFrame {
     public void setEditButton(JButton editButton) {
         this.editButton = editButton;
     }
+
+    public JTextField getIdCatText() {
+        return idCatText;
+    }
+
+    public void setIdCatText(JTextField idCatText) {
+        this.idCatText = idCatText;
+    }
+
+    public JTextField getNamaCatText() {
+        return namaCatText;
+    }
+
+    public void setNamaCatText(JTextField namaCatText) {
+        this.namaCatText = namaCatText;
+    }
+
+    public JButton getRefreshButton() {
+        return refreshButton;
+    }
+
+    public void setRefreshButton(JButton refreshButton) {
+        this.refreshButton = refreshButton;
+    }
+
     
-    public JButton getClearButton() {
-        return clearButton;
-    }
-
-    public void setClearButton(JButton clearButton) {
-        this.clearButton = clearButton;
-    }
-
-    public JTextField getIdText() {
-        return idText;
-    }
-
-    public void setIdText(JTextField idText) {
-        this.idText = idText;
-    }
-
-    public JComboBox<String> getKategoriCB() {
-        return kategoriCB;
-    }
-
-    public void setKategoriCB(JComboBox<String> kategoriCB) {
-        this.kategoriCB = kategoriCB;
-    }
-
-    public JTextField getKuantitasText() {
-        return kuantitasText;
-    }
-
-    public void setKuantitasText(JTextField kuantitasText) {
-        this.kuantitasText = kuantitasText;
-    }
-
-    public JTextField getNamaText() {
-        return namaText;
-    }
-
-    public void setNamaText(JTextField namaText) {
-        this.namaText = namaText;
-    }
-    
-    public JTextField getHargaText() {
-        return hargaText;
-    }
-    
-    public void setHargaText(JTextField hargaText) {
-        this.hargaText = hargaText;
-    }
-
-    public JTable getProductTable() {
-        return productTable;
-    }
-
-    public void setProductTable(JTable productTable) {
-        this.productTable = productTable;
-    }
 }

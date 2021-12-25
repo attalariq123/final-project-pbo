@@ -1,13 +1,15 @@
 package MODEL;
 
-public class KategoriModel {
+public class CategoryModel {
     private int ID;
     private String nama_kategori;
 
-    public KategoriModel(int ID, String nama_kategori) {
+    public CategoryModel(int ID, String nama_kategori) {
         this.ID = ID;
         this.nama_kategori = nama_kategori;
     }
+
+    public CategoryModel() {}
     
     public int getID() {
         return ID;

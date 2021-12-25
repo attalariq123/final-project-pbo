@@ -7,5 +7,5 @@
  * Author:  attal
  * Created: Dec 24, 2021
  */
-select * from produk
+select * from `kategori produk`
 

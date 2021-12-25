@@ -1,9 +1,11 @@
 package CONTROLLER;
 
 
+import MODEL.CategoryModel;
 import MODEL.ProductModel;
 import MODEL.UserModel;
 import VIEW.AdminHome;
+import VIEW.CategoryMenu;
 import VIEW.LoginForm;
 import VIEW.ProductMenu;
 import java.awt.event.ActionEvent;
@@ -38,7 +40,7 @@ public class AdminController {
                     productMenu();
                     break;
                 case "CATEGORY":
-                    productMenu();
+                    categoryMenu();
                     break;
                 case "CUSTOMER":
                     productMenu();
@@ -52,13 +54,20 @@ public class AdminController {
         }
     }
     
+    public void categoryMenu() {
+        view.dispose();
+        CategoryMenu v = new CategoryMenu();
+        CategoryModel m = new CategoryModel();
+        CategoryController c = new CategoryController(m, v);
+        c.initController();
+    }
+    
     public void productMenu() {
         view.dispose();
         ProductMenu v = new ProductMenu();
         ProductModel m = new ProductModel();
         ProductController c = new ProductController(m, v);
         c.initController();
-        v.setVisible(true);
     }
     
     public void logout() {
