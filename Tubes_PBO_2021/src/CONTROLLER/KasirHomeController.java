@@ -45,9 +45,8 @@ public class KasirHomeController {
     
     public void orderMenu() {
         view.dispose();
-        CustomerKasirMenu v = new CustomerKasirMenu();
-        CustomerModel m = new CustomerModel();
-        CustomerKasirController c = new CustomerKasirController(m, v);
+        OrderMenu v = new OrderMenu();
+        OrderController c = new OrderController(v);
         c.initController();
     }
     
