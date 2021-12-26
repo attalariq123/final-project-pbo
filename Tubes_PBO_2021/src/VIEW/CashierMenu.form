@@ -92,7 +92,7 @@
               <Color blue="66" green="cc" red="0" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Manage Cashier"/>
+            <Property name="text" type="java.lang.String" value="Manage Cashier User"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
         </Component>
@@ -178,20 +178,12 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="usernameLabel" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="passwordLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="passwordLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="passwordText" min="-2" pref="177" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="usernameText" min="-2" pref="177" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="passwordText" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                              <Component id="usernameText" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
