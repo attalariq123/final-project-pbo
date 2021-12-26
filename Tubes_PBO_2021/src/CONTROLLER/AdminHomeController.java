@@ -7,10 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-public class AdminController {
+public class AdminHomeController {
     private final AdminHome view;
     
-    public AdminController(AdminHome v) {
+    public AdminHomeController(AdminHome v) {
         view = v;
         initView();
     }

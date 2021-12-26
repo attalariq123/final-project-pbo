@@ -3,7 +3,7 @@ package CONTROLLER;
 import DBHelper.KoneksiDB;
 import MODEL.AdminModel;
 import VIEW.AdminHome;
-import VIEW.CashierHome;
+import VIEW.KasirHome;
 import VIEW.LoginForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,7 +70,7 @@ public class LoginController {
                
                if (rs.next()) {
                     AdminHome v = new AdminHome();
-                    AdminController c = new AdminController(v);
+                    AdminHomeController c = new AdminHomeController(v);
                     c.initController();
                     view.dispose();
                 } else {
@@ -85,8 +85,9 @@ public class LoginController {
                ResultSet rs = st.executeQuery();
                
                if (rs.next()) {
-                    CashierHome home = new CashierHome();
-                    home.setVisible(true);
+                    KasirHome v = new KasirHome();
+                    KasirHomeController c = new KasirHomeController(v);
+                    c.initController();
                     view.dispose();
                 } else {
                    view.loginError(username, password);
