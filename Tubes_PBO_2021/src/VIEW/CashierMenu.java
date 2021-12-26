@@ -1,6 +1,6 @@
 package VIEW;
 
-import CONTROLLER.AdminController;
+import CONTROLLER.AdminHomeController;
 import DBHelper.cashierDB;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -307,7 +307,7 @@ public class CashierMenu extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         AdminHome v = new AdminHome();
-        AdminController c = new AdminController(v);
+        AdminHomeController c = new AdminHomeController(v);
         c.initController();
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed

@@ -1,18 +1,18 @@
 package VIEW;
 
-import CONTROLLER.AdminHomeController;
-import DBHelper.categoryDB;
+import CONTROLLER.KasirHomeController;
+import DBHelper.customerDB;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class CategoryMenu extends javax.swing.JFrame {
+public class CustomerKasirMenu extends javax.swing.JFrame {
 
-    public CategoryMenu() {
+    public CustomerKasirMenu() {
         initComponents();
-        fetchDataCategory();
+        fetchDataCustomer();
     }
 
     @SuppressWarnings("unchecked")
@@ -25,25 +25,31 @@ public class CategoryMenu extends javax.swing.JFrame {
         refreshButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         IdLabel = new javax.swing.JLabel();
-        NamaLabel = new javax.swing.JLabel();
-        idCatText = new javax.swing.JTextField();
-        namaCatText = new javax.swing.JTextField();
+        namaLabel = new javax.swing.JLabel();
+        alamatLabel = new javax.swing.JLabel();
+        telpLabel = new javax.swing.JLabel();
+        idText = new javax.swing.JTextField();
+        namaText = new javax.swing.JTextField();
+        alamatText = new javax.swing.JTextField();
+        telpText = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        categoryTable = new javax.swing.JTable();
+        customerTable = new javax.swing.JTable();
         clearButton = new javax.swing.JButton();
+        umurText = new javax.swing.JTextField();
+        umurLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Manage Category");
+        setTitle("Manage Customer");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         welcomeLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(0, 204, 102));
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        welcomeLabel.setText("Manage Category");
+        welcomeLabel.setText("Manage Customer");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         backButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
@@ -85,13 +91,25 @@ public class CategoryMenu extends javax.swing.JFrame {
         IdLabel.setForeground(new java.awt.Color(0, 204, 102));
         IdLabel.setText("ID");
 
-        NamaLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
-        NamaLabel.setForeground(new java.awt.Color(0, 204, 102));
-        NamaLabel.setText("Nama");
+        namaLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
+        namaLabel.setForeground(new java.awt.Color(0, 204, 102));
+        namaLabel.setText("Nama");
 
-        idCatText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        alamatLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
+        alamatLabel.setForeground(new java.awt.Color(0, 204, 102));
+        alamatLabel.setText("Alamat");
 
-        namaCatText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        telpLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
+        telpLabel.setForeground(new java.awt.Color(0, 204, 102));
+        telpLabel.setText("No Telp");
+
+        idText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        namaText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        alamatText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        telpText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         addButton.setBackground(new java.awt.Color(0, 204, 102));
         addButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
@@ -108,41 +126,44 @@ public class CategoryMenu extends javax.swing.JFrame {
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Delete");
 
-        categoryTable.setAutoCreateRowSorter(true);
-        categoryTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
+        customerTable.setAutoCreateRowSorter(true);
+        customerTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nama Kategori"
+                "ID", "Nama", "Umur", "Alamat", "No Telp"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        categoryTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        categoryTable.setRowHeight(26);
-        categoryTable.setRowMargin(4);
-        categoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        customerTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        customerTable.setRowHeight(26);
+        customerTable.setRowMargin(4);
+        customerTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                categoryTableMouseClicked(evt);
+                customerTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(categoryTable);
-        if (categoryTable.getColumnModel().getColumnCount() > 0) {
-            categoryTable.getColumnModel().getColumn(0).setPreferredWidth(20);
-        }
+        jScrollPane1.setViewportView(customerTable);
 
         clearButton.setBackground(new java.awt.Color(0, 204, 102));
         clearButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
         clearButton.setForeground(new java.awt.Color(255, 255, 255));
         clearButton.setText("Clear");
+
+        umurText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        umurLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 18)); // NOI18N
+        umurLabel.setForeground(new java.awt.Color(0, 204, 102));
+        umurLabel.setText("Umur");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -151,58 +172,84 @@ public class CategoryMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(umurLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(umurText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(IdLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NamaLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(namaLabel, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(namaCatText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idCatText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(namaText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(clearButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)))
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                        .addComponent(deleteButton))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(alamatLabel)
+                            .addComponent(telpLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telpText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(alamatText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(IdLabel)
-                            .addComponent(idCatText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
-                                .addComponent(NamaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(namaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(namaCatText)))
+                                .addComponent(namaText)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(umurLabel)
+                            .addComponent(umurText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(alamatLabel)
+                            .addComponent(alamatText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(telpLabel)
+                            .addComponent(telpText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addButton)
                             .addComponent(editButton)
                             .addComponent(deleteButton)
                             .addComponent(clearButton))))
-                .addContainerGap())
+                .addGap(11, 11, 11))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,24 +265,28 @@ public class CategoryMenu extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        AdminHome v = new AdminHome();
-        AdminHomeController c = new AdminHomeController(v);
+        KasirHome v = new KasirHome();
+        KasirHomeController c = new KasirHomeController(v);
         c.initController();
         this.dispose();
     }//GEN-LAST:event_backButtonActionPerformed
-
     
-    
-    private void categoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTableMouseClicked
+    private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
         // TODO add your handling code here:
-        String id = getCategoryTable().getValueAt(getCategoryTable().getSelectedRow(), 0).toString();
-        String nama = getCategoryTable().getValueAt(getCategoryTable().getSelectedRow(), 1).toString();
+        String id = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 0).toString();
+        String nama = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 1).toString();
+        String umur = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 2).toString();
+        String alamat = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 3).toString();
+        String telp = getCustomerTable().getValueAt(getCustomerTable().getSelectedRow(), 4).toString();
 
-        getIdCatText().setText(id);
-        getNamaCatText().setText(nama);
-    }//GEN-LAST:event_categoryTableMouseClicked
+        getIdText().setText(id);
+        getNamaText().setText(nama);
+        getUmurText().setText(umur);
+        getAlamatText().setText(alamat);
+        getTelpText().setText(telp);
+    }//GEN-LAST:event_customerTableMouseClicked
 
-    public void CategoryButtonListener(ActionListener buttonListener) {
+    public void CustomerButtonListener(ActionListener buttonListener) {
         clearButton.addActionListener(buttonListener);
         addButton.addActionListener(buttonListener);
         editButton.addActionListener(buttonListener);
@@ -243,27 +294,33 @@ public class CategoryMenu extends javax.swing.JFrame {
         refreshButton.addActionListener(buttonListener);
     }
     
-    public void fetchDataCategory() {
-        DefaultTableModel dm = new categoryDB().readData();
-        categoryTable.setModel(dm);
+    public void fetchDataCustomer() {
+        DefaultTableModel dm = new customerDB().readData();
+        customerTable.setModel(dm);
     }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IdLabel;
-    private javax.swing.JLabel NamaLabel;
     private javax.swing.JButton addButton;
+    private javax.swing.JLabel alamatLabel;
+    private javax.swing.JTextField alamatText;
     private javax.swing.JButton backButton;
-    private javax.swing.JTable categoryTable;
     private javax.swing.JButton clearButton;
+    private javax.swing.JTable customerTable;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
-    private javax.swing.JTextField idCatText;
+    private javax.swing.JTextField idText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField namaCatText;
+    private javax.swing.JLabel namaLabel;
+    private javax.swing.JTextField namaText;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JLabel telpLabel;
+    private javax.swing.JTextField telpText;
+    private javax.swing.JLabel umurLabel;
+    private javax.swing.JTextField umurText;
     private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -275,20 +332,20 @@ public class CategoryMenu extends javax.swing.JFrame {
         this.addButton = addButton;
     }
 
+    public JTextField getAlamatText() {
+        return alamatText;
+    }
+
+    public void setAlamatText(JTextField alamatText) {
+        this.alamatText = alamatText;
+    }
+
     public JButton getBackButton() {
         return backButton;
     }
 
     public void setBackButton(JButton backButton) {
         this.backButton = backButton;
-    }
-
-    public JTable getCategoryTable() {
-        return categoryTable;
-    }
-
-    public void setCategoryTable(JTable categoryTable) {
-        this.categoryTable = categoryTable;
     }
 
     public JButton getClearButton() {
@@ -315,20 +372,28 @@ public class CategoryMenu extends javax.swing.JFrame {
         this.editButton = editButton;
     }
 
-    public JTextField getIdCatText() {
-        return idCatText;
+    public JTextField getIdText() {
+        return idText;
     }
 
-    public void setIdCatText(JTextField idCatText) {
-        this.idCatText = idCatText;
+    public void setIdText(JTextField idText) {
+        this.idText = idText;
     }
 
-    public JTextField getNamaCatText() {
-        return namaCatText;
+    public JTextField getNamaText() {
+        return namaText;
     }
 
-    public void setNamaCatText(JTextField namaCatText) {
-        this.namaCatText = namaCatText;
+    public void setNamaText(JTextField namaText) {
+        this.namaText = namaText;
+    }
+
+    public JTable getCustomerTable() {
+        return customerTable;
+    }
+
+    public void setCustomerTable(JTable customerTable) {
+        this.customerTable = customerTable;
     }
 
     public JButton getRefreshButton() {
@@ -337,6 +402,22 @@ public class CategoryMenu extends javax.swing.JFrame {
 
     public void setRefreshButton(JButton refreshButton) {
         this.refreshButton = refreshButton;
+    }
+
+    public JTextField getTelpText() {
+        return telpText;
+    }
+
+    public void setTelpText(JTextField telpText) {
+        this.telpText = telpText;
+    }
+
+    public JTextField getUmurText() {
+        return umurText;
+    }
+
+    public void setUmurText(JTextField umurText) {
+        this.umurText = umurText;
     }
 
     
