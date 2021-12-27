@@ -7,5 +7,5 @@ How to run:
 3. Create database 'inventory'
 4. Run 'SQL Exec' file
 5. Login as Admin :  
-   Username = admin
+   Username = admin ||
    Password = admin
