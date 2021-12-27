@@ -100,7 +100,7 @@ public class productDB {
     
     public Boolean deleteData(String id) {
          //SQL STMT
-        String sql="DELETE FROM produk WHERE ID ='"+id+"'";
+        String sql="DELETE FROM produk WHERE id ='"+id+"'";
 
         try {
             //GET COONECTION

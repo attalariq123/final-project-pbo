@@ -34,7 +34,11 @@ public class ProductController {
             System.out.println(e.getActionCommand());
             switch (e.getActionCommand()) {
                 case "Add":
-                    addData();
+                    try {
+                        addData();
+                    } catch (NullPointerException | NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "Data Tidak Boleh Kosong");
+                    }
                     break;
                 case "Edit":
                     updateData();
@@ -80,11 +84,11 @@ public class ProductController {
         String kategori = cat.getNama_kategori();
         
         if (new productDB().createData(id, nama, harga, kuantitas, deskripsi, kategori)) {
-            JOptionPane.showMessageDialog(null, "Insert Produk Berhasil");
+        JOptionPane.showMessageDialog(null, "Insert Produk Berhasil");
 
-            //CLEAR TEXTFIELD
-            clearFields();
-            view.fetchDataProduct();
+        //CLEAR TEXTFIELD
+        clearFields();
+        view.fetchDataProduct();
             
         } else {
             System.out.println("add data error");
