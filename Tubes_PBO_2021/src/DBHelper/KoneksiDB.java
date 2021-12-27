@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class KoneksiDB {
     private static Connection koneksi;
@@ -20,6 +21,7 @@ public class KoneksiDB {
                 System.out.println("Koneksi Berhasil...");
             } catch(SQLException ex) {
                 Logger.getLogger(KoneksiDB.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "No Database Connection");
                 System.out.println("Koneksi Gagal");
             }
         }
