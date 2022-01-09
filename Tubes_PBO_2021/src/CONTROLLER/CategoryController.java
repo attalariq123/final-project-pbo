@@ -62,10 +62,7 @@ public class CategoryController {
         model.setID(Integer.parseInt(view.getIdCatText().getText()));
         model.setNama_kategori(view.getNamaCatText().getText());
         
-        int id = model.getID();
-        String nama = model.getNama_kategori();
-        
-        if (new categoryDB().createData(id, nama)) {
+        if (new categoryDB().createData(model)) {
             JOptionPane.showMessageDialog(null, "Insert Kategori Berhasil");
 
             //CLEAR TEXTFIELD
@@ -106,10 +103,8 @@ public class CategoryController {
         
         model.setID(Integer.parseInt(id));
         model.setNama_kategori(view.getNamaCatText().getText());
-        
-        String nama = model.getNama_kategori();
 
-        if (new categoryDB().updateData(id, nama)) {
+        if (new categoryDB().updateData(id, model)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
 
             //CLEAR TEXT

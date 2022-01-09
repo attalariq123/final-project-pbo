@@ -1,5 +1,6 @@
 package DBHelper;
 
+import MODEL.CustomerModel;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,7 +51,14 @@ public class customerDB {
 
     }
     
-    public Boolean createData(int id, String nama, String umur, String alamat, String telp) {
+    public Boolean createData(CustomerModel model) {
+        
+        int id = model.getId();
+        String nama = model.getNama();
+        String umur = model.getUmur();
+        String alamat = model.getAlamat();
+        String telp = model.getNomorTelp();
+        
         //SQL STATEMENT
         String sql = "INSERT INTO customer(id, nama, umur, alamat, `no telp`) VALUES ('"+id+"','"+nama+"', '"+umur+"','"+alamat+"','"+telp+"')";
 
@@ -73,7 +81,13 @@ public class customerDB {
         return false;
     }
     
-    public Boolean updateData(String id, String nama, String umur, String alamat, String telp) {
+    public Boolean updateData(String id, CustomerModel model) {
+        
+        String nama = model.getNama();
+        String umur = model.getUmur();
+        String alamat = model.getAlamat();
+        String telp = model.getNomorTelp();
+        
         //SQL STMT
         String sql = "UPDATE customer SET `nama`='"+nama+"', `umur`='"+umur+"', `alamat`='"+alamat+"', `no telp`='"+telp+"' WHERE ID='"+id+"'";
 

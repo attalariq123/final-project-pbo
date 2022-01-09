@@ -1,5 +1,6 @@
 package DBHelper;
 
+import MODEL.CashierModel;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,7 +55,16 @@ public class cashierDB {
 
     }
     
-    public Boolean createData(int id, String nama, String umur, String alamat, String telp, String username, String password) {
+    public Boolean createData(CashierModel model) {
+        
+        int id = model.getId();
+        String username = model.getUsername();
+        String password = model.getPassword();
+        String nama = model.getNama();
+        String umur = model.getUmur();
+        String alamat = model.getAlamat();
+        String telp = model.getNomorTelp();
+        
         //SQL STATEMENT
         String sql = "INSERT INTO cashier(id, nama, umur, alamat, `no telp`, username, password) VALUES ('"+id+"','"+nama+"', '"+umur+"','"+alamat+"','"+telp+"', '"+username+"', '"+password+"')";
 
@@ -77,7 +87,15 @@ public class cashierDB {
         return false;
     }
     
-    public Boolean updateData(String id, String nama, String umur, String alamat, String telp, String username, String password) {
+    public Boolean updateData(String id, CashierModel model) {
+            
+        String username = model.getUsername();
+        String password = model.getPassword();
+        String nama = model.getNama();
+        String umur = model.getUmur();
+        String alamat = model.getAlamat();
+        String telp = model.getNomorTelp();
+        
         //SQL STMT
         String sql = "UPDATE cashier SET `nama`='"+nama+"', `umur`='"+umur+"', `alamat`='"+alamat+"', `no telp`='"+telp+"',`username`='"+username+"', `password`='"+password+"' WHERE ID='"+id+"'";
 

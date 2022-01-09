@@ -75,15 +75,7 @@ public class ProductController {
         model.setDeskripsi(view.getDeskripsiText().getText());
         model.setKategori(new CategoryModel(view.getKategoriCB().getSelectedIndex(), view.getKategoriCB().getSelectedItem().toString()));
         
-        int id = model.getId();
-        String nama = model.getNama();
-        String harga = model.getHarga();
-        int kuantitas = model.getKuantitas();
-        String deskripsi = model.getDeskripsi();
-        CategoryModel cat = model.getKategori();
-        String kategori = cat.getNama_kategori();
-        
-        if (new productDB().createData(id, nama, harga, kuantitas, deskripsi, kategori)) {
+        if (new productDB().createData(model)) {
         JOptionPane.showMessageDialog(null, "Insert Produk Berhasil");
 
         //CLEAR TEXTFIELD
@@ -129,14 +121,7 @@ public class ProductController {
         model.setDeskripsi(view.getDeskripsiText().getText());
         model.setKategori(new CategoryModel(view.getKategoriCB().getSelectedIndex(), view.getKategoriCB().getSelectedItem().toString()));
         
-        String nama = model.getNama();
-        int kuantitas = model.getKuantitas();
-        String harga = model.getHarga();
-        String deskripsi = model.getDeskripsi();
-        CategoryModel cat = model.getKategori();
-        String kategori = cat.getNama_kategori();
-
-        if (new productDB().updateData(id, nama, harga, kuantitas, deskripsi, kategori)) {
+        if (new productDB().updateData(model, id)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
 
             //CLEAR TEXT
@@ -150,5 +135,6 @@ public class ProductController {
     
     public void refreshData() {
         view.fetchDataProduct();
+        clearFields();
     }
 }

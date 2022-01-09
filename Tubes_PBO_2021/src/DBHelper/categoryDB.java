@@ -1,5 +1,6 @@
 package DBHelper;
 
+import MODEL.CategoryModel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +47,10 @@ public class categoryDB  {
 
     }
    
-    public Boolean createData(int id, String nama) {
+    public Boolean createData(CategoryModel model) {
+        
+        int id = model.getID();
+        String nama = model.getNama_kategori();
         //SQL STATEMENT
         String sql = "INSERT INTO `kategori produk`(id, nama) VALUES ('"+id+"','"+nama+"')";
 
@@ -68,7 +72,10 @@ public class categoryDB  {
         return false;
     }
     
-    public Boolean updateData(String id, String nama) {
+    public Boolean updateData(String id, CategoryModel model) {
+        
+        String nama = model.getNama_kategori();
+        
         //SQL STMT
         String sql = "UPDATE `kategori produk` SET `nama`='"+nama+"' WHERE ID='"+id+"'";
 

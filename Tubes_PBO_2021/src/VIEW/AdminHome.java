@@ -36,6 +36,7 @@ public class AdminHome extends javax.swing.JFrame {
         appLabel1.setText("Manajemen Inventory Toko");
 
         welcomeLabel1.setFont(new java.awt.Font("Microsoft YaHei", 1, 20)); // NOI18N
+        welcomeLabel1.setForeground(new java.awt.Color(255, 255, 255));
         welcomeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         welcomeLabel1.setText("Menu Admin");
         welcomeLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -45,10 +46,10 @@ public class AdminHome extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(161, Short.MAX_VALUE)
                 .addComponent(appLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(welcomeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

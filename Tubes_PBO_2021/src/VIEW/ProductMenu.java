@@ -53,7 +53,7 @@ public class ProductMenu extends javax.swing.JFrame {
         setResizable(false);
 
         welcomeLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
-        welcomeLabel.setForeground(new java.awt.Color(0, 204, 102));
+        welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         welcomeLabel.setText("Manage Product");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -159,6 +159,7 @@ public class ProductMenu extends javax.swing.JFrame {
         productTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         productTable.setRowHeight(26);
         productTable.setRowMargin(4);
+        productTable.getTableHeader().setReorderingAllowed(false);
         productTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 productTableMouseClicked(evt);
@@ -214,7 +215,7 @@ public class ProductMenu extends javax.swing.JFrame {
                             .addComponent(deskripsiText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(kuantitasText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(kategoriCB, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -334,7 +335,6 @@ public class ProductMenu extends javax.swing.JFrame {
         DefaultTableModel dm = new productDB().readData();
         productTable.setModel(dm);
     }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DeskripsiLabel;

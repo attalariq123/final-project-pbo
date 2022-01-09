@@ -2,7 +2,8 @@ package MODEL;
 
 public class CashierModel extends PersonModel {
     private int id;
-    private String username, password;
+    private String username;
+    private String password;
 
     public CashierModel(int id, String nama, String umur, String alamat, String nomorTelp, String username, String password) {
         super(nama, umur, alamat, nomorTelp);

@@ -35,6 +35,14 @@ CREATE TABLE IF NOT EXISTS `kategori produk` (
     nama VARCHAR(32) NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `order` (
+    customer VARCHAR(32) NOT NULL,
+    produk VARCHAR(32) NOT NULL,
+    kuantitas int(4) NOT NULL,
+    `total harga` VARCHAR(32) NOT NULL,
+    `date` VARCHAR(32) NOT NULL PRIMARY KEY
+) ENGINE=MyISAM AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4;
+
 INSERT INTO `admin` (`username`, `password`) VALUES ('admin','admin');
 
 INSERT INTO `cashier` (id, nama, umur, alamat, `no telp`, username, password) VALUES ('1','Bilal', '20','Bekasi','08121212', 'kasirsatu', 'kasir');
