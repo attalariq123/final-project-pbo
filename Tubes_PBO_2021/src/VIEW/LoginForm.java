@@ -82,9 +82,13 @@ public class LoginForm extends JFrame {
 
         usernameText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         usernameText.setToolTipText("Your Username");
+        usernameText.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
+        usernameText.setOpaque(false);
 
         passwordText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passwordText.setToolTipText("Your Password");
+        passwordText.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
+        passwordText.setOpaque(false);
 
         loginButton.setBackground(new java.awt.Color(0, 204, 102));
         loginButton.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N

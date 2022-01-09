@@ -71,15 +71,7 @@ public class CashierController {
         model.setAlamat(view.getAlamatText().getText());
         model.setNomorTelp(view.getTelpText().getText());
         
-        int id = model.getId();
-        String username = model.getUsername();
-        String password = model.getPassword();
-        String nama = model.getNama();
-        String umur = model.getUmur();
-        String alamat = model.getAlamat();
-        String telp = model.getNomorTelp();
-        
-        if (new cashierDB().createData(id, nama, umur, alamat, telp, username, password)) {
+        if (new cashierDB().createData(model)) {
             JOptionPane.showMessageDialog(null, "Insert User Cashier Berhasil");
 
             //CLEAR TEXTFIELD
@@ -125,15 +117,8 @@ public class CashierController {
         model.setUmur(view.getUmurText().getText());
         model.setAlamat(view.getAlamatText().getText());
         model.setNomorTelp(view.getTelpText().getText());
-        
-        String username = model.getUsername();
-        String password = model.getPassword();
-        String nama = model.getNama();
-        String umur = model.getUmur();
-        String alamat = model.getAlamat();
-        String telp = model.getNomorTelp();
 
-        if (new cashierDB().updateData(id, nama, umur, alamat, telp, username, password)) {
+        if (new cashierDB().updateData(id, model)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
 
             //CLEAR TEXT

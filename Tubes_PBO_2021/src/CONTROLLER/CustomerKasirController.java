@@ -67,13 +67,7 @@ public class CustomerKasirController {
         model.setAlamat(view.getAlamatText().getText());
         model.setNomorTelp(view.getTelpText().getText());
         
-        int id = model.getId();
-        String nama = model.getNama();
-        String umur = model.getUmur();
-        String alamat = model.getAlamat();
-        String telp = model.getNomorTelp();
-        
-        if (new customerDB().createData(id, nama, umur, alamat, telp)) {
+        if (new customerDB().createData(model)) {
             JOptionPane.showMessageDialog(null, "Insert Customer Berhasil");
 
             //CLEAR TEXTFIELD
@@ -117,13 +111,8 @@ public class CustomerKasirController {
         model.setUmur(view.getUmurText().getText());
         model.setAlamat(view.getAlamatText().getText());
         model.setNomorTelp(view.getTelpText().getText());
-        
-        String nama = model.getNama();
-        String umur = model.getUmur();
-        String alamat = model.getAlamat();
-        String telp = model.getNomorTelp();
 
-        if (new customerDB().updateData(id, nama, umur, alamat, telp)) {
+        if (new customerDB().updateData(id, model)) {
             JOptionPane.showMessageDialog(null, "Successfully Updated");
 
             //CLEAR TEXT

@@ -1,5 +1,7 @@
 package DBHelper;
 
+import MODEL.CategoryModel;
+import MODEL.ProductModel;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +54,15 @@ public class productDB {
 
     }
     
-    public Boolean createData(int id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
+    public Boolean createData(ProductModel model) {
+        
+        int id = model.getId();
+        String nama = model.getNama();
+        String harga = model.getHarga();
+        int kuantitas = model.getKuantitas();
+        String deskripsi = model.getDeskripsi();
+        CategoryModel cat = model.getKategori();
+        String kategori = cat.getNama_kategori();
         //SQL STATEMENT
         String sql = "INSERT INTO produk(id, nama, harga, kuantitas, deskripsi, kategori) VALUES ('"+id+"','"+nama+"', '"+harga+"','"+kuantitas+"','"+deskripsi+"','"+kategori+"')";
 
@@ -75,7 +85,15 @@ public class productDB {
         return false;
     }
     
-    public Boolean updateData(String id, String nama, String harga, int kuantitas, String deskripsi, String kategori) {
+    public Boolean updateData(ProductModel model, String id) {
+        
+        String nama = model.getNama();
+        int kuantitas = model.getKuantitas();
+        String harga = model.getHarga();
+        String deskripsi = model.getDeskripsi();
+        CategoryModel cat = model.getKategori();
+        String kategori = cat.getNama_kategori();
+        
         //SQL STMT
         String sql = "UPDATE produk SET `nama`='"+nama+"', `harga`='"+harga+"', `kuantitas`='"+kuantitas+"', `deskripsi`='"+deskripsi+"', `kategori`='"+kategori+"' WHERE ID='"+id+"'";
 
@@ -94,6 +112,39 @@ public class productDB {
         } catch (SQLException e) {
             Logger.getLogger(productDB.class.getName()).log(Level.SEVERE, null, e);
             System.out.println("Edit product failed");
+            return false;
+        }
+    }
+    
+    public Boolean updateQty(int qtyNew, int qtyOld, String id) {
+        int qty = qtyNew;
+        int qty_lama = qtyOld;
+        int kuantitas = qty_lama - qty;
+        String sql;
+        
+        if (qty > qty_lama || qty <= 0) {
+            JOptionPane.showMessageDialog(null, "Stok Produk Tidak Tersedia");
+            return false;
+        } else {
+            System.out.println(qty);
+            sql = "UPDATE `produk` SET `kuantitas` = '"+kuantitas+"' WHERE `produk`.`id` = '"+id+"'";
+        }
+        
+        try {
+            //GET COONECTION
+            Connection con = KoneksiDB.getKoneksi();
+
+            //STATEMENT
+            Statement s = con.prepareStatement(sql);
+
+            //EXECUTE
+            s.execute(sql);
+
+            return true;
+
+        } catch (SQLException e) {
+            Logger.getLogger(productDB.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("Edit quantity failed");
             return false;
         }
     }

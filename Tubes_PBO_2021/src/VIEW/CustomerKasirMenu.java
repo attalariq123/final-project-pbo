@@ -47,7 +47,7 @@ public class CustomerKasirMenu extends javax.swing.JFrame {
         setResizable(false);
 
         welcomeLabel.setFont(new java.awt.Font("Microsoft YaHei", 1, 24)); // NOI18N
-        welcomeLabel.setForeground(new java.awt.Color(0, 204, 102));
+        welcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         welcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         welcomeLabel.setText("Manage Customer");
         welcomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

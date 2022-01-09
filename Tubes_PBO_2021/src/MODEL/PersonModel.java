@@ -1,7 +1,10 @@
 package MODEL;
 
 public class PersonModel {
-    private String nama, umur, alamat, nomorTelp;
+    private String nama;
+    private String umur;
+    private String alamat;
+    private String nomorTelp;
 
     public PersonModel(String nama, String umur, String alamat, String nomorTelp) {
         this.nama = nama;
