@@ -13,6 +13,10 @@ public class PersonModel {
         this.nomorTelp = nomorTelp;
     }
     
+    public PersonModel(String nama){
+        this.nama = nama;
+    }
+    
     public PersonModel(){}
 
     public String getNama() {

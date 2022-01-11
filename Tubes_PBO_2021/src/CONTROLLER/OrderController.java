@@ -3,7 +3,9 @@ package CONTROLLER;
 import DBHelper.customerDB;
 import DBHelper.orderDB;
 import DBHelper.productDB;
+import MODEL.CustomerModel;
 import MODEL.OrderModel;
+import MODEL.ProductModel;
 import VIEW.OrderMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -86,8 +88,8 @@ public class OrderController {
     
     public void addData() {
         try {
-            model.setCustomer(view.getCustomerText().getText());
-            model.setProduct(view.getProdukText().getText());
+            model.setCustomer(new CustomerModel(view.getCustomerText().getText()));
+            model.setProduct(new ProductModel(view.getProdukText().getText()));
             model.setQty(Integer.parseInt(view.getKuantitasText().getText()));
             int harga = Integer.parseInt((String) view.getProductTable().getValueAt(view.getProductTable().getSelectedRow(), 2));
             model.setTotalPrice(String.valueOf(model.getQty() * harga));
@@ -105,7 +107,7 @@ public class OrderController {
                 fetchDataProduct();
                 view.getProdukText().setText("");
                 view.getKuantitasText().setText("");
-                view.fetchDataOrder(model.getCustomer());
+                view.fetchDataOrder(model.getCustomer().getNama());
             } else {
                 System.out.println("Add Order Failed");
                 JOptionPane.showMessageDialog(null, "Insert Order Failed");
@@ -126,7 +128,7 @@ public class OrderController {
 
             if (new orderDB().deleteData(date)) {
                 JOptionPane.showMessageDialog(null, "Drop Order Berhasil");
-                view.fetchDataOrder(model.getCustomer());              
+                view.fetchDataOrder(model.getCustomer().getNama());              
                 view.getProdukText().setText("");
                 view.getKuantitasText().setText("");
             } else {

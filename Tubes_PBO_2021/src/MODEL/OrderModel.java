@@ -1,13 +1,13 @@
 package MODEL;
 
 public class OrderModel {
-    private String customer;
-    private String product;
+    private CustomerModel customer;
+    private ProductModel product;
     private int qty;
     private String totalPrice;
     private String date;
 
-    public OrderModel(String customer, String product, int qty, String totalPrice, String date) {
+    public OrderModel(CustomerModel customer, ProductModel product, int qty, String totalPrice, String date) {
         this.customer = customer;
         this.product = product;
         this.qty = qty;
@@ -25,19 +25,19 @@ public class OrderModel {
         this.date = date;
     }
     
-    public String getCustomer() {
+    public CustomerModel getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(CustomerModel customer) {
         this.customer = customer;
     }
 
-    public String getProduct() {
+    public ProductModel getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(ProductModel product) {
         this.product = product;
     }
 

@@ -8,6 +8,10 @@ public class CustomerModel extends PersonModel {
         this.id = id;
     }
     
+    public CustomerModel(String nama){
+        super(nama);
+    }
+    
     public CustomerModel(){}
     
     public int getId() {
