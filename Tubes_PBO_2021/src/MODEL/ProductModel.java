@@ -17,6 +17,10 @@ public class ProductModel {
         this.kategori = kategori;
     }
     
+    public ProductModel(String nama){
+        this.nama = nama;
+    }
+    
     public ProductModel(){};
 
     public int getId() {

@@ -53,8 +53,8 @@ public class orderDB {
     }
     
     public Boolean createData(OrderModel model, int qtyNew, int qtyOld) {
-        String customer = model.getCustomer();
-        String product = model.getProduct();
+        String customer = model.getCustomer().getNama();
+        String product = model.getProduct().getNama();
         int kuantitas = model.getQty();
         String totalPrice = model.getTotalPrice();
         String date = model.getDate();
@@ -92,8 +92,8 @@ public class orderDB {
     
     public Boolean updateData(OrderModel model) {
         
-        String customer = model.getCustomer();
-        String product = model.getProduct();
+        String customer = model.getCustomer().getNama();
+        String product = model.getProduct().getNama();
         int kuantitas = model.getQty();
         String totalPrice = model.getTotalPrice();
         //SQL STMT
